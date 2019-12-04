@@ -1,0 +1,405 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+     <meta charset="utf-8">
+    <title>Events</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <!-- Favicons -->
+    <link href="{% static 'event_reg/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'event_reg/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
+        rel="stylesheet">
+    <!-- Bootstrap CSS File -->
+    <link href="{% static 'event_reg/lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Libraries CSS Files -->
+    <link href="{% static 'event_reg/lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'event_reg/lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'event_reg/css/style.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <!--==========================
+      Header
+    ============================-->
+
+    <div class="modal fade" id="login-signin" tabindex="-1" role="dialog" aria-labelledby="login-signin" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-body p-0">
+                    <nav class="login-btns">
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active  m-0" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">LOGIN</a>
+                            <!--<a class="nav-item nav-link m-0" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="false">SIGNUP</a>-->
+
+                        </div>
+                    </nav>
+                    <div class="border-box m-0">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane  fade show active" id="login" role="tabpanel" aria-labelledby="login">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white">
+                                            <i class="fa  fa-user fa-fw"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="User Name">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white"><i class="fa  fa-key fa-fw"></i></span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="Password">
+                                </div>
+                                <div class="text-center mt-1">
+                                    <a href="user-admin.html" class="btn btn-info">LOGIN</a>
+                                </div>
+                            </div>
+                            <!--<div class="tab-pane fade" id="signin" role="tabpanel" aria-labelledby="signin">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white">
+                                            <i class="fa fa-envelope-o fa-fw"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="Email address">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white">
+                                            <i class="fa  fa-user fa-fw"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="User Name">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white"><i class="fa  fa-key fa-fw"></i></span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="Password">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white"><i class="fa  fa-key fa-fw"></i></span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="Confirm Password">
+                                </div>
+                                <div class="text-center mt-1">
+                                    <button type="button" class="btn btn-info">
+                                        SIGN UP
+                                    </button>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <header id="header">
+        <div class="container">
+
+            <div id="logo" class="pull-left">
+
+                <a href="index.html" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title=""></a>
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                   <li class="menu-active"><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about_us' %}">About</a></li>
+                    <li><a href="{% url 'services' %}">Services</a></li>
+                    <li><a href="{% url 'events' %}">Events</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    <!-- <li><a class="" href="#" data-toggle="modal" data-target="#login-signin">Login / Register</a></li>-->
+                    <li><a class="btn btn-info add-event-btn" href="/admin/" >{{user}}</a></li>
+                    <li><a class="btn btn-info add-event-btn" href="/accounts/logout/" >Logout</a></li>
+                </ul>
+            </nav>
+            <!-- #nav-menu-container -->
+        </div>
+    </header>
+
+
+    <section id="innerpage">
+        <div class="container wow fadeInUp">
+            <div class="section-header event-details">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-3"><img src="/media/{{event.event_photo}}" alt="detail image " class="detail-img-brdr img-fluid" /></div>
+                    <div class="col-lg-7 col-md-7 text-left">
+                        <h2>{{event.event_name}}<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></h2>
+                        <p><i class="fa fa-clock-o fa-1x"></i> {{event.event_start_date}} </p>
+                        <p class="ht47"><i class="fa fa-map-marker"></i> {{event.event_address}}</p>
+                        <a href="{% url 'register_with_pk' pk=event.pk %}" class="btn btn-info btn-md">Register Now</a>
+                    </div>
+
+                    <div class="col-lg-3">
+
+                    </div>
+                </div>
+                <ul class="breadcrumb mt-10">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'events' %}">Events</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Event Details</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <main id="main">
+        <div class="container">
+            <section class="wow fadeInUp">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3">
+                        <section id="speakers">
+                            <div class="border-box wow fadeInUp">
+                                <div class="section-header filter">
+                                    <h2>
+                                        Browse events
+                                        <small>Popular cities</small>
+                                    </h2>
+                                </div>
+                                <div class="city-sidebar">
+
+                                    
+                             
+                                    <ul>
+                                        {%for location in location %}
+                                        <li><a href="#"> {{location.0}}<small class="pull-right">{{location.1}}</small></a>   </li>
+                                      <!--   <li><a href="#"> Bengaluru <small class="pull-right">05</small></a>     </li>
+                                        <li><a href="#"> Chennai <small class="pull-right">20</small></a>     </li>
+                                        <li><a href="#"> London <small class="pull-right">02</small></a>   </li>
+                                        <li><a href="#"> Washington DC <small class="pull-right">50</small></a>     </li>
+                                        <li><a href="#"> New York <small class="pull-right">02</small></a>     </li> -->
+                                        {%endfor%}
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                            <div class="border-box wow m-0 fadeInUp">
+                                <div class="section-header p-0 filter">
+                                    <h2>
+                                        Search by event category
+                                    </h2>
+                                </div>
+                                <div class="city-sidebar">
+                                    <ul>
+                                        {%for cat in all_events %}
+                                        <li><a href="#"> {{cat.event_category}} <small class="pull-right">12</small></a>   </li>
+                                       <!--  <li><a href="#"> Auto & Automotive <small class="pull-right">02</small></a>     </li>
+                                        <li><a href="#"> Baby, Kids & Maternity <small class="pull-right">10</small></a>     </li>
+                                        <li><a href="#"> Banking & Finance <small class="pull-right">03</small></a>   </li>
+                                        <li><a href="#"> Building & Construction <small class="pull-right">01</small></a>     </li>
+                                        <li><a href="#"> Business Services <small class="pull-right">15</small></a>     </li> -->
+                                        {%endfor%}
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-9 col-md-9">
+                        <div class="border-box ">
+                            <!-- Tabs -->
+
+                            
+                            <section id="tabs" class="detail-tab p-0">
+
+                                <nav>
+                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">About</a>
+
+                                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Photos</a>
+
+                                    </div>
+                                </nav>
+                                <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                                    <div class="tab-pane  fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                        <p>
+                                            <b>Movies</b>
+                                            {{event.event_discription}}
+                                           
+
+
+
+                                            <h3>Highlights</h3>
+                                            <ul>
+                                                <p>{{event.event_highlight1}}</p>
+                                                <p>{{event.event_highlight2}}</p>
+                                                <p>{{event.event_highlight3}}</p>
+                                                <p>{{event.event_highlight4}}</p>
+                                                <p>{{event.event_highlight5}}</p>
+                                                <p>{{event.event_highlight6}}</p>
+                                            </ul>
+                                        </p>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                        <div class="container-fluid venue-gallery-container">
+                                            <div class="row no-gutters">
+
+                                                <div class="col-lg-3 col-md-4">
+                                                    <div class="venue-gallery">
+                                                        <a href="/media/{{event.event_photo1}}" class="venobox" data-gall="venue-gallery">
+                                                            <img src="/media/{{event.event_photo1}}" alt="" class="img-fluid">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-4">
+                                                    <div class="venue-gallery">
+                                                        <a href="/media/{{event.event_photo2}}" class="venobox" data-gall="venue-gallery">
+                                                            <img src="/media/{{event.event_photo2}}" alt="" class="img-fluid">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-4">
+                                                    <div class="venue-gallery">
+                                                        <a href="/media/{{event.event_photo3}}" class="venobox" data-gall="venue-gallery">
+                                                            <img src="/media/{{event.event_photo3}}" alt="" class="img-fluid">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-4">
+                                                    <div class="venue-gallery">
+                                                        <a href="/media/{{event.event_photo4}}" class="venobox" data-gall="venue-gallery">
+                                                            <img src="/media/{{event.event_photo4}}" alt="" class="img-fluid">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-4">
+                                                    <div class="venue-gallery">
+                                                        <a href="/media/{{event.event_photo5}}" class="venobox" data-gall="venue-gallery">
+                                                            <img src="/media/{{event.event_photo5}}" alt="" class="img-fluid">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-4">
+                                                    <div class="venue-gallery">
+                                                        <a href="/media/{{event.event_photo6}}" class="venobox" data-gall="venue-gallery">
+                                                            <img src="/media/{{event.event_photo6}}" alt="" class="img-fluid">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-4">
+                                                    <div class="venue-gallery">
+                                                        <a href="/media/{{event.event_photo7}}" class="venobox" data-gall="venue-gallery">
+                                                            <img src="/media/{{event.event_photo7}}" alt="" class="img-fluid">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-4">
+                                                    <div class="venue-gallery">
+                                                        <a href="/media/{{event.event_photo}}" class="venobox" data-gall="venue-gallery">
+                                                            <img src="/media/{{event.event_photo}}" alt="" class="img-fluid">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                                        Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                                    </div>
+                                </div>
+
+
+                            </section>
+
+                         
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+
+
+        </div>
+
+    </main>
+    <!--==========================
+      Footer
+    ============================-->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <img src="{% static 'event_reg/img/logo.png' %}" alt="TheEvenet">
+                        <p>Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In invusamus repellat cumque.</p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li class="menu-active"><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about_us' %}">About</a></li>
+                    <li><a href="{% url 'services' %}">Services</a></li>
+                    <li><a href="{% url 'events' %}">Events</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Contact Us</h4>
+                        <p>
+                            <i class="fa fa-map-marker"></i> jdf gjdfghjdf hgfd <br>
+                            fdgjkfd gkfdgfdg 456545<br>
+                            India <br>
+                            <strong><i class="fa fa-phone"></i> </strong> 1234567890<br>
+                            <strong><i class="fa  fa-envelope"></i>  </strong> info@domain.com<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Follow Us</h4>
+
+
+                        <div class="social-links">
+                            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <small> &copy; Copyright <strong>Vyoma Motion pictures</strong>. All Rights Reserved</small>
+        </div>
+
+    </footer>
+    <!-- #footer -->
+    <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+    <!-- JavaScript Libraries -->
+     <script src="{% static 'event_reg/lib/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/jquery/jquery-migrate.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/superfish/hoverIntent.js' %}"></script>
+    <script src="{% static 'event_reg/lib/superfish/superfish.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/venobox/venobox.min.js' %}"></script>
+    <script src="{% static 'event_reg/js/main.js' %}"></script>
+</body>
+</html>

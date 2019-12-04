@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+   <meta charset="utf-8">
+    <title>Events</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+        
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
+   
+    <!-- Favicons -->
+    <link href="{% static 'event_reg/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'event_reg/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
+        rel="stylesheet">
+    <!-- Bootstrap CSS File -->
+    <link href="{% static 'event_reg/lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Libraries CSS Files -->
+    <link href="{% static 'event_reg/lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'event_reg/lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'event_reg/css/style.css' %}" rel="stylesheet" />
+  
+
+  
+   
+</head>
+<body>
+    <div class="modal fade" id="login-signin" tabindex="-1" role="dialog" aria-labelledby="login-signin" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-body p-0">
+                    <nav class="login-btns">
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active  m-0" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">LOGIN</a>
+                            <!--<a class="nav-item nav-link m-0" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="false">SIGNUP</a>-->
+
+                        </div>
+                    </nav>
+                    <div class="border-box m-0">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane  fade show active" id="login" role="tabpanel" aria-labelledby="login">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white">
+                                            <i class="fa  fa-user fa-fw"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="User Name">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white"><i class="fa  fa-key fa-fw"></i></span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="Password">
+                                </div>
+                                <div class="text-center mt-1">
+                                    <a href="user-admin.html" class="btn btn-info">LOGIN</a>
+                                </div>
+                            </div>
+                            <!--<div class="tab-pane fade" id="signin" role="tabpanel" aria-labelledby="signin">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white">
+                                            <i class="fa fa-envelope-o fa-fw"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="Email address">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white">
+                                            <i class="fa  fa-user fa-fw"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="User Name">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white"><i class="fa  fa-key fa-fw"></i></span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="Password">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ninput bg-white"><i class="fa  fa-key fa-fw"></i></span>
+                                    </div>
+                                    <input class="form-control ninput" type="text" placeholder="Confirm Password">
+                                </div>
+                                <div class="text-center mt-1">
+                                    <button type="button" class="btn btn-info">
+                                        SIGN UP
+                                    </button>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <header id="header">
+        <div class="container">
+
+            <div id="logo" class="pull-left">
+
+                <a href="index.html" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title=""></a>
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about_us' %}">About</a></li>
+                    <li><a href="{% url 'services' %}">Services</a></li>
+                    <li><a href="{% url 'events' %}">Events</a></li>
+                    <li><a href="{% url 'contact' %}l">Contact</a></li>
+                    <!-- <li><a class="" href="#" data-toggle="modal" data-target="#login-signin">Login / Register</a></li>-->
+                    <li><a class="btn btn-info add-event-btn" href="/admin/" >{{user}}</a></li>
+                    <li><a class="btn btn-info add-event-btn" href="/accounts/logout/" >Logout</a></li>
+                </ul>
+            </nav>
+            <!-- #nav-menu-container -->
+        </div>
+    </header>
+    <section id="innerpage">
+        <div class="container wow fadeInUp">
+            <!--<div class="section-header">
+                <h2>About Us</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                </ul>
+            </div>-->
+        </div>
+    </section>
+    <main id="main" class="bg-white">
+        <div class="form-conainer">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 pr0 col-sm-4 hidden-xs">
+                    <div class="side-img">
+                        <img src="{% static 'event_reg/img/sideimage.jpg' %}" alt="">
+                        <div class="side-img-content">
+                            <h2>Register now </h2>
+                            <p>while seats are available !</p>
+                        </div>
+                    </div>
+                </div>
+                <aside class="col-sm-8 col-lg-8 col-md-8 pl0  content-form">
+                    <div class="border-box p30">
+                        <div class="row">
+
+                            <div class="col-lg-5 col-md-5 ">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 mt-2" style="margin-right: -28px;">
+                                       <form  enctype="multipart/form-data" method='POST' action="/register/">
+                                        {% csrf_token %}
+
+                                            
+                                            <div class="col-lg-12 form-group  col-md-12">
+
+                                                    <!-- <lable>Event ID</lable> -->
+                                                   <input class="form-control" name="event_id"type="hidden" value="{{event.pk}}" placeholder="Event Ids" />
+                                                </div>
+                                            <div class="col-lg-12 form-group  col-md-12">
+
+                                                    <lable>Event Name</lable>
+                                                   <input class="form-control" name="event_name" type="text" value="{{event.event_name}}" placeholder="Event Name" />
+                                                </div>
+
+                                                <div class="col-lg-12 form-group  col-md-12">
+
+                                                    <lable>Event Category</lable>
+                                                   <input class="form-control" name="event_category" type="text" value="{{event.event_category}}" placeholder="Event Name" />
+                                                </div>
+                                                <div class="col-lg-12 form-group  col-md-12">
+                                                      <lable>Event Sub-Category</lable><br>
+
+                                               <input class="form-control" name="event_sub-sategory" type ="text" list = "airports" name="airports" required> 
+                                                  <datalist id = "airports" multiple>
+                                                    <option value = "Berlin">
+                                                    <option value = "Los Angeles">
+                                                    <option value = "Moscow">
+                                                    <option value = "Paris">
+                                                  </datalist>
+                                                </div>
+                                                <div class="col-lg-12 form-group  col-md-12">
+
+                                                    <lable>First Name</lable>
+                                                   <input class="form-control" type="text" name="event_name"value="{{user.first_name}}" placeholder="Enter First Name" />
+                                                </div>
+                                                 <div class="col-lg-12 form-group  col-md-12">
+                                                    <lable>Last Name</lable>
+                                                    <input class="form-control" type="text"value="{{user.last_name}}" placeholder="Enter Last Name" />
+                                                </div>
+                                                <div class="col-lg-12  col-md-12">
+                                                        <lable>Email</lable>
+                                                    <div class="input-group form-group ">
+                                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Enter Email ID" value="{{user.email}}">
+                                                        
+                                                    </div>
+
+                                                </div>
+
+                                                                               
+
+                                               <div class="col-lg-12 form-group form-inline  col-md-12">
+                                                    <lable>Gender</lable>
+                                                    <div class="form-check reg">
+                                                        <label>
+                                                            <input type="radio" name="radio" checked> <span class="label-text">Male</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check reg">
+                                                        <label>
+                                                            <input type="radio" name="radio"> <span class="label-text">Female</span>
+                                                        </label>
+                                                    </div>
+
+
+                                                </div>
+                                                 <div class="col-lg-12 form-group  col-md-12">
+                                                    <lable>Age</lable>
+                                                    <input class="form-control" type="text" maxlength="2" placeholder="Age" />
+                                                </div>
+
+                                              
+
+                                                 <div class="col-lg-12 form-group  col-md-12">
+                                                    <lable>Mobile</lable>
+                                                    <input class="form-control" type="tel" name="pin" pattern="[0-9]{10}" maxlength="10" placeholder="Mobile" />
+                                                </div>
+
+                                                <div class="col-lg-12 form-group  col-md-12">
+                                                    <lable>Alternate Mobile</lable>
+                                                    <input class="form-control" type="tel" name="pin" pattern="[0-9]{10}" maxlength="10" placeholder="Alternate Mobile" />
+                                                </div>
+
+                                                <div class="col-lg-12 form-group form-inline  col-md-12">
+                                                    <lable>Marital Status</lable>
+                                                    <div class="form-check reg">
+                                                        <label>
+                                                            <input type="radio" name="radio" checked> <span class="label-text">Married</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check reg">
+                                                        <label>
+                                                            <input type="radio" name="radio"> <span class="label-text">Un-Married</span>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+
+                                                  <div class="col-lg-12 form-control col-md-12">
+                                                    
+                                                    <div class="input-group">
+                                                        
+                                                        <input type="text" class="form-control" placeholder="Birth Date" id="datepicker">
+                                                    </div>
+                                                </div><br>
+
+                                                 <div class="row">
+                                                <div class="col-lg-12 form-group  col-md-12">
+                                                    <lable>Address</lable>
+                                                    <textarea class="form-control" rows="2" placeholder="Address"></textarea>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class=" row">
+                                                <div class="col-lg-6 form-group">
+                                                    <lable>City</lable>
+                                                    <input class="form-control" type="text" value="" placeholder="City" />
+                                                </div>
+                                                <div class="col-lg-6 form-group">
+                                                    <lable>State</lable>
+                                                    <input class="form-control" type="text" value="" placeholder="State" />
+                                                </div>
+                                                <div class="col-lg-6 form-group">
+                                                    <lable>Pincode</lable>
+                                                    <input class="form-control" type="text" value="" name="pin" pattern="[0-9]{6}" maxlength="6" placeholder="Pincode" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-lg-4 pull-lg-8 text-center">
+                                                    <img src="https://icon-library.net/images/image-gallery-icon/image-gallery-icon-9.jpg" class="m-x-auto img-fluid" alt="avatar" />
+                                                </div>
+                                                <div class="col-lg-8 pull-lg-8 text-center">
+                                                    <h6 class="mt-2">
+                                                        Upload a different photos
+                                                    </h6>
+
+                                                    <div class="file-field medium">
+                                                        <div class="btn btn-outline-default waves-effect">
+                                                            <span>Choose image files</span>
+                                                            <input type="file" accept="image/* " id="images" multiple>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class=" form-group row">
+                                                <div class="col-lg-4 pull-lg-8 text-center">
+                                                    <img src="http://clipart-library.com/images/8cEb85rXi.png" class="m-x-auto img-fluid" alt="avatar" />
+                                                </div>
+                                                <div class="col-lg-8 pull-lg-8 text-center">
+                                                    <h6 class="mt-2">
+                                                        Upload a different Videos
+                                                    </h6>
+
+                                                    <div class="file-field medium">
+                                                        <div class="btn btn-outline-default waves-effect">
+                                                            <span>Choose Video files</span>
+                                                            <input type="file" accept="video/* " id="videos" multiple>
+                                                        </div>
+                                        
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 form-group  col-md-12">
+                                                    <p class="alert alert-success ver-code"> <input type="checkbox" required="*"> This is compliance about you personal data,we are going to use your data for our future activity.
+                                                     </p>
+                                                     
+                                                    
+                                                </div>
+                                            
+
+                                                                        
+
+                                            
+                                            <div class="form-group row">
+                                                    <div class="col-lg-12 text-center">
+                                                    <input type="reset" class="btn btn-secondary" data-dismiss="modal" aria-label="Close" value="Form reset" />
+
+                                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                                    </div>
+                                                </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                            </div> 
+
+                        
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+
+
+    </main>
+    <!--==========================
+      Footer
+    ============================-->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <img src="{% static 'event_reg/img/logo.png' %}" alt="TheEvenet">
+                        <p>Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In invusamus repellat cumque.</p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                           <li ><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about_us' %}">About</a></li>
+                    <li><a href="{% url 'services' %}">Services</a></li>
+                    <li><a href="{% url 'events' %}">Events</a></li>
+                    <li><a href="{% url 'contact' %}l">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Contact Us</h4>
+                        <p>
+                            <i class="fa fa-map-marker"></i> jdf gjdfghjdf hgfd <br>
+                            fdgjkfd gkfdgfdg 456545<br>
+                            India <br>
+                            <strong><i class="fa fa-phone"></i> </strong> 1234567890<br>
+                            <strong><i class="fa  fa-envelope"></i>  </strong> info@domain.com<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Follow Us</h4>
+
+
+                        <div class="social-links">
+                            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <small> &copy; Copyright <strong>Vyoma Motion pictures</strong>. All Rights Reserved</small>
+        </div>
+
+    </footer>
+    <!-- #footer -->
+    <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+    <script src="{% static 'event_reg/lib/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/jquery/jquery-migrate.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/superfish/hoverIntent.js' %}"></script>
+    <script src="{% static 'event_reg/lib/superfish/superfish.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'event_reg/lib/venobox/venobox.min.js' %}"></script>
+    <script src="{% static 'event_reg/js/main.js' %}"></script>
+
+    <script>
+  ej.base.enableRipple(true);
+    var datepicker = new ej.calendars.DatePicker();
+    datepicker.appendTo('#datepicker');
+  </script>
+
+</body>
+</html>
