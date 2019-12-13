@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'import_export',
     'event_reg',
+    'crispy_forms',
 ]
 
+CRISPY_TEMPLATE_PACK='BOOTSTRAP4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -129,8 +131,29 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'example@gmail.com'
-EMAIL_HOST_PASSWORD = 'password'
+
+PAYTM_MERCHANT_KEY = "f3Dg7!qCEu46llS!"
+PAYTM_MERCHANT_ID = "tQVQVH71689155287442"
+HOST_URL = "http://localhost:8000"
+PAYTM_CALLBACK_URL = "/response/"
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
+
+
+if DEBUG:
+    PAYTM_MERCHANT_KEY = "f3Dg7!qCEu46llS!"
+    PAYTM_MERCHANT_ID = "tQVQVH71689155287442"
+    PAYTM_WEBSITE = 'WEBSTAGING'
+    HOST_URL = 'http://localhost:8000'
+    '''
+    In sandbox enviornment you can use following wallet credentials to login and make payment.
+    Mobile Number : 7777777777
+    Password : Paytm12345
+    OTP: 489871
+    This test wallet is topped-up to a balance of 7000 Rs. every 5 minutes.
+    '''
+
+EMAIL_HOST = 'mail.vyomamopic.com'
 EMAIL_PORT = 587
+EMAIL_HOST_USER = '_mainaccount@vyomamopic.com'
+EMAIL_HOST_PASSWORD = 'XbH]b@4V6(e^'
+EMAIL_USE_TLS = True

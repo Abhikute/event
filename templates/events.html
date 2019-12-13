@@ -135,20 +135,24 @@
                             <h1 class="mb-1 text-white text-center pb-0"><span class="text-orange"> Vyoma  </span> Motion pictures </h1>
                             <p class="mb-2 pb-0">Find Interesting Competition </p>
                         </div>
-                        <form action="#" method="post" novalidate="novalidate">
+                        <form action="/events/" method="post" novalidate="novalidate">
+
                             <div class="row">
                                 <div class="col-lg-3 col-md-2"></div>
                                 <div class="col-lg-8  col-md-10">
-
+                                    {% csrf_token %}
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <select class="custom-select   form-control ">
+                                                    <select name="city" class="custom-select   form-control ">
                                                         <option selected>Select City</option>
-                                                        <option value="1">New Delhi</option>
-                                                        <option value="2">Pune</option>
-                                                        <option value="3">Mumbai</option>
+                                                        {%for city in locations%}
+                                                        <option value="{{city}}">{{city}}</option>
+                                                        <!-- <option value="New Delhi">New Delhi</option>
+                                                        <option value="Pune">Pune</option>
+                                                        <option value="Mumbai">Mumbai</option> -->
+                                                        {%endfor%}
                                                     </select>
                                                 </div>
                                             </div>
@@ -157,18 +161,21 @@
 
                                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                             <div class="form-group">
-                                                <select class="custom-select form-control">
-                                                    <option>Select Category </option>
-                                                    <option>Dance</option>
+                                                <select name="category"class="custom-select form-control">
+
+                                                    <option value="Select Category">Select Category</option>
+                                                    {%for category in categorys%}
+                                                    <option value="{{category}}">{{category}}</option>
+                                                  <!--   <option>Dance</option>
                                                     <option>Music</option>
                                                     <option>Casting</option>
-                                                    <option>Movies</option>
-
+                                                    <option>Movies</option> -->
+                                                    {%endfor%}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                            <button type="button" class="btn btn-danger wrn-btn">SEARCH</button>
+                                            <button type="submit" class="btn btn-danger wrn-btn">SEARCH</button>
                                         </div>
                                     </div>
                                 </div>
@@ -414,7 +421,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6 footer-info">
                         <img src="{% static 'event_reg/img/logo.png' %}" alt="TheEvenet">
-                        <p>Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In invusamus repellat cumque.</p>
+                        <p>VYOMA Motion Pictures Pvt. Ltd.</p>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">

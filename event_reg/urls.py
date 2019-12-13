@@ -9,4 +9,6 @@ urlpatterns = [
         url(r'^$', view.home, name='home'), 
         url(r'^event_details/(?P<pk>\d+)/$', view.event_details, name ='event_details_with_pk'),
         url(r'^register/(?P<pk>\d+)/$', view.register, name ='register_with_pk'),
+        
+
 ]
