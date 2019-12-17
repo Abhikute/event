@@ -35,7 +35,7 @@ class user_geristration_form(forms.ModelForm):
 
     class Meta:
         model=user_reg
-        fields=['event_sub_category','gender','age','mobile','alternamte_mobile','marital_status','birthdate','state','city','pincode','address','photo','videofile']
+        fields=['event_sub_category','gender','age','mobile','alternamte_mobile','marital_status','birthdate','state','city','pincode','address']
 			
 
 class SignUpForm(UserCreationForm):

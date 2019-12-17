@@ -11,8 +11,8 @@
     <link href="{% static 'event_reg/img/favicon.png' %}" rel="icon">
     <link href="{% static 'event_reg/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
-        rel="stylesheet">
+   <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
+        rel="stylesheet"> -->
     <!-- Bootstrap CSS File -->
     <link href="{% static 'event_reg/lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Libraries CSS Files -->
@@ -185,10 +185,12 @@
 
 
                             <div class="row no-gutters">
-                                <div class="col-lg-12 venue-map">
-                                    <h>GOOGLE MAP</h>
-                                 
+                                <div  class="col-lg-12 venue-map">
+                                    <h style="color: white">GOOGLE MAP</h>
+                                   
                                 </div>
+                                 <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=university%20of%20san%20francisco&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div>
+                                 
 
                             </div>
 
@@ -301,5 +303,6 @@
     <script src="{% static 'event_reg/lib/wow/wow.min.js' %}"></script>
     <script src="{% static 'event_reg/lib/venobox/venobox.min.js' %}"></script>
     <script src="{% static 'event_reg/js/main.js' %}"></script>
+      
 </body>
 </html>

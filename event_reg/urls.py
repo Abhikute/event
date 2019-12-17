@@ -1,6 +1,7 @@
 from django.conf.urls import url
+from django.urls import path
 from . import views as view
-
+from django.contrib.auth import views
 urlpatterns = [
     
         url(r'^register_user/$', view.usersignup, name='register_user'),

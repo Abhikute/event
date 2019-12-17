@@ -15,8 +15,7 @@
     <link href="{% static 'event_reg/img/favicon.png' %}" rel="icon">
     <link href="{% static 'event_reg/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
-        rel="stylesheet">
+  
     <!-- Bootstrap CSS File -->
     <link href="{% static 'event_reg/lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Libraries CSS Files -->
@@ -24,7 +23,14 @@
     <link href="{% static 'event_reg/lib/animate/animate.min.css' %}" rel="stylesheet">
     <link href="{% static 'event_reg/css/style.css' %}" rel="stylesheet" />
   
-
+<style type="text/css">
+    img{
+  max-width:180px;
+}
+input[type=file]{
+padding:5px;
+background:#2d2d2d;}
+</style>
   
    
 </head>
@@ -109,7 +115,7 @@
 
             <div id="logo" class="pull-left">
 
-                <a href="index.html" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title=""></a>
+                <a href="{% url 'home' %}" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title=""></a>
             </div>
 
             <nav id="nav-menu-container">
@@ -157,7 +163,7 @@
                             <div class="col-lg-5 col-md-5 ">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 mt-2" style="margin-right: -28px;">
-                                       <form  enctype="multipart/form-data" method='POST' action="/register/">
+                                       <form  enctype="multipart/form-data" class="form-control" method='POST' action="/register/">
                                         {% csrf_token %}
                                                                                                                                 
                                             <div class="col-lg-12 form-group  col-md-12">
@@ -174,32 +180,43 @@
                                                 <div class="col-lg-12 form-group  col-md-12">
 
                                                     <lable>Event Category</lable>
-                                                   <input class="form-control" name="event_category" type="text" value="{{event.event_category}}" placeholder="Event Name" />
+                                                   <select class="form-control" name="event_category" id="event_category" size="1" onchange="menu(this.value)">
+                                                        <option value="" disabled selected>Choose event category</option>
+                                                        <option value="{{event.event_category}}" >{{event.event_category}}</option>
+                                                        <!-- <option>Photography</option> -->
+                                                        <!-- <option >Poetry</option>
+                                                        <option>Singing</option>
+                                                        <option>Shayari</option>
+                                                        <option>Tiktok</option>
+                                                                 -->
+                                                        </select>
                                                 </div>
-                                                <!-- <div class="col-lg-12 form-group  col-md-12">
+                                                <div class="col-lg-12 form-group  col-md-12">
                                                       <lable>Event Sub-Category</lable><br>
 
-                                               <input class="form-control" name="event_sub_category" type ="text" list = "airports" name="airports" required> 
-                                                  <datalist id = "airports" multiple>
-                                                    <option value = "Berlin">
-                                                    <option value = "Los Angeles">
-                                                    <option value = "Moscow">
-                                                    <option value = "Paris">
-                                                  </datalist>
-                                                </div> -->
+                                               <select class="form-control" value="{{reg_user.event_sub_category}}" name="event_sub_category" id="event_sub_category" size="1" >
+                                                        <option value="" disabled selected>Choose event Sub-category</option>
+                                                        <option></option>
+                                                        </select>
+                                                </div>
                                                 <div class="col-lg-12 form-group  col-md-12">
 
-                                                    <lable>First Name</lable>
-                                                   <input class="form-control" type="text" name="first_name"value="{{user.first_name}}" placeholder="Enter First Name" />
+                                                    <lable>Username</lable>
+                                                   <input class="form-control" type="text" name="username"value="{{user.username}}" placeholder="Enter username" />
                                                 </div>
-                                                 <div class="col-lg-12 form-group  col-md-12">
-                                                    <lable>Last Name</lable>
-                                                    <input class="form-control" name="Last_name" type="text"value="{{user.last_name}}" placeholder="Enter Last Name" />
+
+                                                <div class="col-lg-12   col-md-12">
+                                                    <!-- <lable>First Name</lable> -->
+                                                    <input class="form-control" name="first_name" type="hidden"value="{{user.first_name}}" placeholder="Enter first Name" />
+                                                </div>
+                                                 <div class="col-lg-12   col-md-12">
+                                                     <!-- <lable>Last Name</lable> -->
+                                                    <input class="form-control" name="Last_name" type="hidden"value="{{user.last_name}}" placeholder="Enter Last Name" />
                                                 </div>
                                                 <div class="col-lg-12  col-md-12">
-                                                        <lable>Email</lable>
+                                                        <!-- <lable>Email</lable> -->
                                                     <div class="input-group form-group ">
-                                                        <input type="text" name="Email" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Enter Email ID" value="{{user.email}}">
+                                                        <input type="hidden" name="Email" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Enter Email ID" value="{{user.email}}">
                                                         
                                                     </div>
 
@@ -230,12 +247,12 @@
 
                                                  <div class="col-lg-12 form-group  col-md-12">
                                                     <lable>Mobile</lable>
-                                                    <input class="form-control" type="tel" name="mobile" pattern="[0-9]{10}" maxlength="10" value="{{reg_user.mobile}}" placeholder="Mobile" />
+                                                    <input class="form-control" type="tel" name="mobile" pattern="[0-9]{10}" maxlength="10" value="{{reg_user.mobile}}" placeholder="Mobile" required/>
                                                 </div>
 
                                                 <div class="col-lg-12 form-group  col-md-12">
                                                     <lable>Alternate Mobile</lable>
-                                                    <input class="form-control" type="tel" name="alternamte_mobile" pattern="[0-9]{10}" value="{{reg_user.alternamte_mobile}}" maxlength="10" placeholder="Alternate Mobile" />
+                                                    <input class="form-control" type="tel" name="alternamte_mobile" pattern="[0-9]{10}" value="{{reg_user.alternamte_mobile}}" maxlength="10" placeholder="Alternate Mobile" required />
                                                 </div>
 
                                                 <div class="col-lg-12 form-group  col-md-12">
@@ -254,14 +271,14 @@
                                                     
                                                     <div class="input-group">
                                                         
-                                                        <input type="text" value="{{reg_user.birthdate}}" name ="birthdate" class="form-control" placeholder="Birth Date" id="datepicker">
+                                                        <input type="text" value="{{reg_user.birthdate}}" name ="birthdate" class="form-control" placeholder="Birth Date" id="datepicker" required>
                                                     </div>
                                                 </div><br>
 
                                                  <div class="row">
                                                 <div class="col-lg-12 form-group  col-md-12">
                                                     <lable>Address</lable>
-                                                    <textarea class="form-control" name="address" value="{{reg_user.address}}" rows="2" placeholder="Address"></textarea>
+                                                    <textarea class="form-control" name="address" value="{{reg_user.address}}" rows="2" placeholder="Address" required></textarea>
                                                     
                                                 </div>
                                             </div>
@@ -270,7 +287,7 @@
                                                    <div class="col-lg-6 form-group">
                                                     <lable>State</lable>
                                                    <!--  <input class="form-control" type="text"name="State" placeholder="State" /> -->
-                                                      <select class="form-control" value="{{reg_user.state}}" name="state" id="countrySelect" size="1" onchange="makeSubmenu(this.value)">
+                                                      <select class="form-control" value="{{reg_user.state}}" name="state" id="countrySelect" size="1" onchange="makeSubmenu(this.value)" required>
                                                         <option value="" disabled selected>Choose State</option>
                                                         <option>Andaman_Nicobar</option>
                                                                 <option>Andhra_Pradesh</option>
@@ -312,7 +329,7 @@
                                                 <div class="col-lg-6 form-group">
                                                     <lable>City</lable>
                                                     <!-- <input class="form-control" name="city" type="text" value="" ` placeholder="City" /> -->
-                                                    <select class="form-control" value="{{reg_user.city}}" name="city" id="citySelect" size="1" >
+                                                    <select class="form-control" value="{{reg_user.city}}" name="city" id="citySelect" size="1" required>
                                                         <option value="" disabled selected>Choose City</option>
                                                         <option></option>
                                                         </select>
@@ -320,18 +337,18 @@
                                              
                                                 <div class="col-lg-6 form-group">
                                                     <lable>Pincode</lable>
-                                                    <input class="form-control" type="text" value={{reg_user.pincode}} name="pincode" pattern="[0-9]{6}" maxlength="6" placeholder="pincode" />
+                                                    <input class="form-control" type="text" value="{{reg_user.pincode}}" name="pincode" pattern="[0-9]{6}" maxlength="6" placeholder="pincode" />
                                                 </div>
                                             </div>
 
 
 
 
-                                            <div class="form-group row">
+                                            <div class="form-group row" id="photo">
                                                 <div class="col-lg-4 pull-lg-8 text-center">
                                                     <img src="https://icon-library.net/images/image-gallery-icon/image-gallery-icon-9.jpg" class="m-x-auto img-fluid" alt="avatar" />
                                                 </div>
-                                                <div class="col-lg-8 pull-lg-8 text-center">
+                                                <div class="col-lg-8 pull-lg-8 text-center" >
                                                     <h6 class="mt-2">
                                                         Upload a different photos
                                                     </h6>
@@ -339,14 +356,20 @@
                                                     <div class="file-field medium">
                                                         <div class="btn btn-outline-default waves-effect">
                                                             <span>Choose image files</span>
-                                                            <input type="file" name="photo" accept="image/* "  multiple>
-                                                        </div>
+
+                                                             </div>
+                                                            <input type="file" id="photo" name="photo" required multiple><br/ >
+                                                             
+                                                            
+                                                       
+                                                        <div id="selectedFiles"></div>
+                                                        
                                                     </div>
 
                                                 </div>
 
                                             </div>
-                                            <div class=" form-group row"> 
+                                            <div class=" form-group row" id="videofile"> 
                                                 <div class="col-lg-4 pull-lg-8 text-center">
                                                     <img src="http://clipart-library.com/images/8cEb85rXi.png" class="m-x-auto img-fluid" alt="avatar" />
                                                 </div>
@@ -358,21 +381,23 @@
                                                     <div class="file-field medium">
                                                         <div class="btn btn-outline-default waves-effect">
                                                             <span>Choose Video files</span>
-                                                            <input type="file"  name="videofile" accept="video/* "  multiple>
+                                                            <input type="file" id="videofile" name="videofile" accept="video/* " required multiple>
                                                         </div>
                                         
                                                 </div>
                                             </div>
+                                        </div>
 
                                             <div class="col-lg-12 form-group  col-md-12">
-                                                    <p class="alert alert-success ver-code"> <input type="checkbox" > This is compliance about you personal data,we are going to use your data for our future activity.
-                                                     </p>
+                                                    <lable>Terms & Conditions:</lable><br>
+                                                     <input  type="checkbox" > I have read and agree<a href="{% url 'terms_conditions' %}">Terms & conditions</a> and <a href="">Privacy Policy</a>
+                                                     
                                                      
                                                     
                                                 </div>
                                             
 
-                                                                        
+                                                          
 
                                             
                                             <div class="form-group row">
@@ -382,7 +407,11 @@
                                                     <button class="btn btn-primary" type="submit">Submit</button>
                                                     </div>
                                                 </div>
+
+                                                
                                         </form>
+
+
                                     </div>
                                 </div>
 
@@ -421,7 +450,7 @@
                     <li><a href="{% url 'about_us' %}">About</a></li>
                     <li><a href="{% url 'services' %}">Services</a></li>
                     <li><a href="{% url 'events' %}">Events</a></li>
-                    <li><a href="{% url 'contact' %}l">Contact</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
                         </ul>
                     </div>
 
@@ -461,7 +490,7 @@
     <!-- #footer -->
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
     <!-- JavaScript Libraries -->
-    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+   <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
     <script src="{% static 'event_reg/lib/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'event_reg/lib/jquery/jquery-migrate.min.js' %}"></script>
     <script src="{% static 'event_reg/lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -472,12 +501,34 @@
     <script src="{% static 'event_reg/lib/wow/wow.min.js' %}"></script>
     <script src="{% static 'event_reg/lib/venobox/venobox.min.js' %}"></script>
     <script src="{% static 'event_reg/js/main.js' %}"></script>
-
+   
     <script>
-  ej.base.enableRipple(true);
-    var datepicker = new ej.calendars.DatePicker();
-    datepicker.appendTo('#datepicker');
-  </script>
+
+    var selDiv = "";
+        
+    document.addEventListener("DOMContentLoaded", init, false);
+    
+    function init() {
+        document.querySelector('#photo').addEventListener('change', handleFileSelect, false);
+        selDiv = document.querySelector("#selectedFiles");
+    }
+        
+    function handleFileSelect(e) {
+        
+        if(!e.target.files) return;
+        
+        selDiv.innerHTML = "";
+        
+        var files = e.target.files;
+        for(var i=0; i<files.length; i++) {
+            var f = files[i];
+            
+            selDiv.innerHTML += f.name + "<br/>";
+
+        }
+        
+    }
+    </script>
   <script type="text/javascript">
 var citiesByState = {
 
@@ -536,6 +587,70 @@ document.getElementById("countrySelect").selectedIndex = 0;
 document.getElementById("citySelect").selectedIndex = 0;
 }
 </script>
+
+<script>
+  ej.base.enableRipple(true);
+    var datepicker = new ej.calendars.DatePicker();
+    datepicker.appendTo('#datepicker');
+  </script>
+
+
+    <script type="text/javascript">
+var ev_sub_category = {
+
+Dance:['Bhratnatyam','Kathak','Manipuri','Kuchipuri','Odissi','Bhangra/Gidda','Garba','Rouf','Ghoomar','Chhau','Bihu','Lavani','Mohiniyattam','Sattriya Dance','Waltz','Tango','Cha-Cha-Cha','Rumba','Samba','Mambo','Quickstep','Jive','Bolero','Charleston','Other'],
+Poetry:['Sonnet','Elegy','Haiku','Limerick','Epic','Acrostic','Ode','Ballad','Epigram','Concrete','Other'],
+Shayari:['Love','Funny','Sad','Romantic','Dosti','Urdu','Aansu','Bewafa','Birthday','Dard','Dard-e-dil','Diwali','Dua','Gham','Intezaar','Ishq','Judai','Khawab','Mohobbat','Naseeb','Patriotic','Prem','Pyaar','Sharabi','Tanhai','Arman','Udasi','Attitude','Kash','Khoobsurat','Khyal','Jindagi','Tareef','Mausam','Yaad','Shubh prabhat','Shubh ratri','Shikva','Hindi urdu gazzal','Hindi','Other'],
+Photography:['Landscape','Wildlife','Aerial','Sports/Action','Portrait','Architectural','Wedding/Event','Fashion','Macro','Baby/Family','Abstract','Beauty','Bird','Black And White','Bodyscape','Candid','Conceptual','Firework','Food','Forced perspective','HDR','High speed','Infrared','Lomo','Long exposure','Micro','Mobile','Modeling','Nature','Night','Nude','Panoramic','Past and present','Rain','Rainbow','Real estate','Relection','Satellite','Still Life','Strom','Stock,Street','Sunrise/sunset','Tilt Shift','Time lapse','Travel','Underwater','Urban/Industrial','Vehicle','Vintage','Other'],
+Singing:['Classical','Folk','Baul','Bhajan','Odissi','Thumri','Dadra','Chaiti','kajari','Sufi','Gazal','Qawwali','Bhangra','Blues','Filmy','Goa','Trance','Indi-pop','Jazz','Rock','Other'],
+Tiktok:['Action','Comedy','Crime','Drama','Fantasy','Horror','Music','Musical','Romance','Sci-Fi','Social','Thriller','War','Western','Other'],
+
+
+}
+function menu(value) {
+if(value.length==0) document.getElementById("event_sub_category").innerHTML = "<option></option>";
+else {
+var citiesOptions = "";
+for(cityId in ev_sub_category[value]) {
+citiesOptions+="<option>"+ev_sub_category[value][cityId]+"</option>";
+}
+document.getElementById("event_sub_category").innerHTML = citiesOptions;
+}
+}
+function displaySelected() { var country = document.getElementById("event_category").value;
+var city = document.getElementById("event_sub_category").value;
+alert(country+"\n"+city);
+}
+function resetSelection() {
+document.getElementById("event_category").selectedIndex = 0;
+document.getElementById("event_sub_category").selectedIndex = 0;
+}
+</script>
+<script type="text/javascript">
+    $(document).ready(function()
+                  {
+                  $("#event_category").change(function()
+        {
+            if($(this).val() == "Photography")
+        {
+            $("#photo").show();
+            $("#videofile").hide();
+        }
+        else
+        {
+            $("#photo").hide();
+            $("#videofile").show();
+
+        }
+            });
+                      $("#photo").show();
+});
+</script>
+
+
+
+
+
 
 </body>
 </html>

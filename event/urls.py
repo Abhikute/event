@@ -37,6 +37,8 @@ urlpatterns = [
     path(r'accounts/', include('django.contrib.auth.urls')),
     path(r'^payment/', views.payment, name='payment'),
     re_path(r'^response/(?P<user_id>\w+)/$', views.response, name='response'),
+    path(r'^terms_conditions/', views.terms_conditions, name='terms_conditions'),
+    
    
    
     
