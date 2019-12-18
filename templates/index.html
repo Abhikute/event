@@ -108,20 +108,21 @@
 
             <div id="logo" class="pull-left">
 
-                <a href="{% url 'home' %}" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title=""></a>
+                <a href="{% url 'index' %}" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title=""></a>
             </div>
 
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li class="menu-active"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="menu-active"><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'about_us' %}">About</a></li>
                     <li><a href="{% url 'services' %}">Services</a></li>
                     <li><a href="{% url 'events' %}">Events</a></li>
                     <li><a href="{% url 'contact' %}">Contact</a></li>
                      
                     <!-- <li><a class="" href="#" data-toggle="modal" data-target="#login-signin">Login / Register</a></li>-->
-                    <li><a class="btn btn-info add-event-btn" href="/admin/" >{{user}}</a></li>
-                    <li><a class="btn btn-info add-event-btn" href="/accounts/logout/" >Logout</a></li>
+                    <!-- <li><a class="btn btn-info add-event-btn" href="/admin/" >{{user}}</a></li>
+                    <li><a class="btn btn-info add-event-btn" href="/accounts/logout/" >Logout</a></li> -->
+                     <li><a class="btn btn-info add-event-btn" href="/admin/" >Switch to admin</a></li>
                 </ul>
             </nav>
      <!-- #nav-menu-container -->
@@ -340,7 +341,7 @@
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Useful Links</h4>
                         <ul>
-                           <li ><a href="{% url 'home' %}">Home</a></li>
+                           <li ><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'about_us' %}">About</a></li>
                     <li><a href="{% url 'services' %}">Services</a></li>
                     <li><a href="{% url 'events' %}">Events</a></li>

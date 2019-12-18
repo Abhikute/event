@@ -38,19 +38,19 @@
 
             <div id="logo" class="pull-left">
 
-                <a href="{% url 'home' %}" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title=""></a>
+                <a href="{% url 'index' %}" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title=""></a>
             </div>
 
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <!-- <li class="menu-active"><a href="{% url 'home' %}">Home</a></li>
+                    <!-- <li class="menu-active"><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'about_us' %}">About</a></li>
                     <li><a href="{% url 'services' %}">Services</a></li>
                     <li><a href="{% url 'events' %}">Events</a></li>
                     <li><a href="{% url 'contact' %}">Contact</a></li> -->
                    
-                     <li><a  href="{% url 'login' %}" >Login</a></li>
-                     <li><a  href="{% url 'register_user' %}"  >Register</a></li>
+                     <li><a  href="{% url 'login' %}" >Signin</a></li>
+                     <li><a  href="{% url 'register_user' %}"  >SignUp</a></li>
                      <li><a  href="/admin/"  >Admin Page</a></li>
                <!--      <li><a class="btn btn-info add-event-btn" href="/admin/" >logged user</a></li>
                     <li><a class="btn btn-info add-event-btn" href="/admin/" >Admin Login</a></li>

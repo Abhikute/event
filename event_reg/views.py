@@ -28,6 +28,10 @@ def home(request):
 
 	return render(request,'index.html',{"event":even})
 
+def index(request):
+	even=event.objects.all()
+
+	return render(request,'index_page.html',{"event":even})
 
 def success(request): 
 	return HttpResponse('Registration successful') 
@@ -205,7 +209,12 @@ def response(request, user_id):
 			# user_update.registration_status="completed"
 			# user_update.payment_status="Done"
 			# user_update.save()
-			return render(request, "response.html", {"paytm": data_dict,"user":user_id})
+			if data_dict['STATUS']=='TXN_SUCCESS':
+				return render(request, "response.html", {"paytm": data_dict,"user":user_id})
+			else:
+				return render(request, "response_error.html", {"paytm": data_dict,"user":user_id})
+
+
 		else:
 			return HttpResponse("checksum verify failed")
 	else:
