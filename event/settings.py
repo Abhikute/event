@@ -25,7 +25,7 @@ SECRET_KEY = '72y6myzmylso#mny4@^0=x&2sv7#pwe!dzw*s3zz)hlrt@@w!3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['103.195.184.48','vyomamopic.com']
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
 MEDIA_URL = '/media/'
@@ -41,10 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'import_export',
     'event_reg',
-    'crispy_forms',
-  
+      
 ]
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

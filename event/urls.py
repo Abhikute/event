@@ -32,7 +32,7 @@ urlpatterns = [
     # path(r'^login/$', view.login),
      path('event_details/', views.event_details, name ='event_details'),
     path('success', views.success, name ='success'),
-   
+    path('user_account/', views.user_account, name ='user_account'),
     path('', include('event_reg.urls')),
     path(r'accounts/', include('django.contrib.auth.urls')),
     path(r'^payment/', views.payment, name='payment'),

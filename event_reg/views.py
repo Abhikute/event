@@ -45,6 +45,14 @@ def contact(request):
 def about_us(request):
 	return render(request,'aboutus.html')
 
+def user_account(request):
+	user=request.user
+	registration_details=user_reg.objects.get(user=user)
+	video_count=Videos.objects.filter(user_reg=registration_details).count()
+	images_count=Images.objects.filter(user_reg=registration_details).count()
+
+	return render(request,'user_account.html',{'registration_details':registration_details,'video_count':video_count,"images_count":images_count})
+
 
 def events(request):
 	all_events=event.objects.all()

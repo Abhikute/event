@@ -24,9 +24,9 @@ class eventview(ImportExportModelAdmin):
 	
 		
 class view_detials(ImportExportModelAdmin):
-	list_display=( 'event_sub_category', 'first_name', 'Last_name', 'Email', 'gender', 'age', 'mobile', 'alternamte_mobile', 'marital_status', 'birthdate', 'address', 'city', 'state', 'pincode' )
+	list_display=( 'user','event_sub_category', 'first_name', 'Last_name', 'Email', 'gender', 'age', 'mobile', 'alternamte_mobile', 'marital_status', 'birthdate', 'address', 'city', 'state', 'pincode' )
 	# list_filter=('STATUS')
-	search_fields=( 'event_sub_category', 'first_name', 'Last_name', 'Email', 'gender', 'age', 'mobile', 'alternamte_mobile', 'marital_status', 'birthdate', 'address', 'city', 'state', 'pincode')
+	search_fields=('user', 'event_sub_category', 'first_name', 'Last_name', 'Email', 'gender', 'age', 'mobile', 'alternamte_mobile', 'marital_status', 'birthdate', 'address', 'city', 'state', 'pincode')
 		
 class Images_view(ImportExportModelAdmin):
 	list_display=( 'user_reg', 'image')
