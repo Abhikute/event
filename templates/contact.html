@@ -1,56 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+
+{% extends 'master.html' %}
+
 {% load static %}
-<head>
-    <meta charset="utf-8">
-    <title>Events</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-    <!-- Favicons -->
-    <link href="{% static 'event_reg/img/favicon.png' %}" rel="icon">
-    <link href="{% static 'event_reg/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
-    <!-- Google Fonts -->
-   <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
-        rel="stylesheet"> -->
-    <!-- Bootstrap CSS File -->
-    <link href="{% static 'event_reg/lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- Libraries CSS Files -->
-    <link href="{% static 'event_reg/lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
-    <link href="{% static 'event_reg/lib/animate/animate.min.css' %}" rel="stylesheet">
-    <link href="{% static 'event_reg/css/style.css' %}" rel="stylesheet" />
-    <link href="{% static 'event_reg/css/style.css' %}" rel="stylesheet" />
-</head>
-<body>
-    <!--==========================
-      Header
-    ============================-->
-    
-    <header id="header">
-        <div class="container">
+{% block content %}
 
-            <div id="logo" class="pull-left">
-
-                <a href="index.html" class="scrollto"><img src="img/logo.png" alt="" title=""></a>
-            </div>
-
-            <nav id="nav-menu-container">
-                <ul class="nav-menu">
-                    <li class="menu-active"><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="{% url 'about_us' %}">About</a></li>
-                    <li><a href="{% url 'services' %}">Services</a></li>
-                    <li><a href="{% url 'events' %}">Events</a></li>
-                    <li><a href="{% url 'contact' %}">Contact</a></li>
-                    <!-- <li><a class="" href="#" data-toggle="modal" data-target="#login-signin">Login / Register</a></li>-->
-                    <!-- <li><a class="btn btn-info add-event-btn" href="/admin/" >{{user}}</a></li> -->
-                   <!--  <li><a class="btn btn-info add-event-btn" href="/accounts/logout/" >Logout</a></li> -->
-
-                     <li><a class="btn btn-info add-event-btn" href="/admin/" >Switch to admin</a></li>
-                </ul>
-            </nav>
-            <!-- #nav-menu-container -->
-        </div>
-    </header>
     <!-- #header -->
     <section id="innerpage">
         <div class="container wow fadeInUp">
@@ -166,72 +119,4 @@
     <!--==========================
       Footer
     ============================-->
-    <footer id="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 footer-info">
-                        <img src="{% static 'event_reg/img/logo.png' %}" alt="TheEvenet">
-                        <p>VYOMA Motion Pictures Pvt. Ltd.</p>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="{% url 'about_us' %}">About</a></li>
-                    <li><a href="{% url 'services' %}">Services</a></li>
-                    <li><a href="{% url 'events' %}">Events</a></li>
-                    <li><a href="{% url 'contact' %}">Contact</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Contact Us</h4>
-                        <p>
-                            <i class="fa fa-map-marker"></i> jdf gjdfghjdf hgfd <br>
-                            fdgjkfd gkfdgfdg 456545<br>
-                            India <br>
-                            <strong><i class="fa fa-phone"></i> </strong> 1234567890<br>
-                            <strong><i class="fa  fa-envelope"></i>  </strong> info@domain.com<br>
-                        </p>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h4>Follow Us</h4>
-
-
-                        <div class="social-links">
-                            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                            <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-                            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="copyright">
-            <small> &copy; Copyright <strong>Vyoma Motion pictures</strong>. All Rights Reserved</small>
-        </div>
-
-    </footer>
-    <!-- #footer -->
-    <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
-    <!-- JavaScript Libraries -->
- <script src="{% static 'event_reg/lib/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'event_reg/lib/jquery/jquery-migrate.min.js' %}"></script>
-    <script src="{% static 'event_reg/lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'event_reg/lib/owlcarousel/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'event_reg/lib/easing/easing.min.js' %}"></script>
-    <script src="{% static 'event_reg/lib/superfish/hoverIntent.js' %}"></script>
-    <script src="{% static 'event_reg/lib/superfish/superfish.min.js' %}"></script>
-    <script src="{% static 'event_reg/lib/wow/wow.min.js' %}"></script>
-    <script src="{% static 'event_reg/lib/venobox/venobox.min.js' %}"></script>
-    <script src="{% static 'event_reg/js/main.js' %}"></script>
-      
-</body>
-</html>
+    {%endblock%}

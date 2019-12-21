@@ -1,20 +1,41 @@
-{% extends 'basic.html' %}
+{% extends 'master.html' %}
 
-{% block title %}User SignUp{% endblock %}
+{% load static %}
+
+<!-- {% block title %}User SignUp{% endblock %} -->
 
 {% block content %}
-    <br><br><br><br><br>
-<h2>User sign up</h2>
-  
-<div  id="signin" role="tabpanel" aria-labelledby="signin">
-                                <div class="input-group mb-3">
+
+<section id="innerpage">
+        <div class="container wow fadeInUp">
+            <div class="section-header">
+                <h2>User sign up</h2>
+
+
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">User sign up</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <main id="main">
+        <div class="container">
+<section class="wow fadeInUp">
+                <div class="border-box">
+                    <div class="row">
+                        
+                        <div class="col-lg-9 col-md-9">
+                            <h2>User sign up</h2>
+              <div  id="signin" role="tabpanel" aria-labelledby="signin">
+                               
                                     
                                        <form method="post" >
                                         {% csrf_token %}
                                           {{forms.as_p}}
                                                  
                                         {% for field in form %}
-                                         <div class="col-lg-12 form-group  col-md-12">
+                                         
                                           <p >
                                             {{ field.label_tag }}<br>
                                             {{ field }}
@@ -25,19 +46,27 @@
                                               <p style="color: red">{{ error }}</p>
                                             {% endfor %}
                                           </p>
-                                               </div>
+                                               
 
                                         {% endfor %}
                                         <button type="submit">Sign up</button>
                                       </form>
                                    
                                    
-                                </div>
+                          
                                 
 
      
 
-</div>
+</div>             </div>
+                    </div>
+                </div>
+              </div>
+            </section>
+
+
+
+    
 
 {% endblock %}
 

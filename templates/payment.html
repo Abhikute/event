@@ -1,9 +1,9 @@
-<html>
-    <head?>
-        <title>Paytm Secure Online Payment Gateway</title>
-   </head>
-   <body>
-       <p>{{user}}</p>
+{% extends 'master.html' %}
+
+{% load static %}
+{% block content %}
+
+       <!-- <p>{{user}}</p> -->
         <table align='center'>
             <tr>
             <td><STRONG>Transaction is being processed,</STRONG></td>
@@ -28,5 +28,4 @@
             document.f1.submit();
         </script>
         </form>
-    </body>
-</html>
+    {%endblock%}
