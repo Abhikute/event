@@ -256,9 +256,9 @@ def register(request,pk=None):
 		registration_form.pop("csrfmiddlewaretoken", None)
 		registration_form.pop("event_name", None)
 		registration_form.pop("event_category", None)
-		registration_form.pop("videofile", None)
+		registration_form.pop("FileUpload", None)
 		registration_form.pop("username",None)
-		registration_form.pop("photo",None)
+		registration_form.pop("FileUploada",None)
 
 		registration={**registration_form}
 		print(registration_form)
@@ -270,9 +270,9 @@ def register(request,pk=None):
 	
 		images_count=''
 		video_count=''
-		
+		print (request.FILES)
 		for key in request.FILES:
-			if key=='photo':
+			if key=='FileUpload':
 
 				images_count=len(request.FILES.getlist(key))
 				for fileimg in request.FILES.getlist(key):
@@ -281,7 +281,7 @@ def register(request,pk=None):
 
 					print (fileimg)
 					
-			elif key=='videofile':
+			elif key=='FileUploada':
 				video_count=len(request.FILES.getlist(key))
 				for fileimg in request.FILES.getlist(key):
 					print(fileimg)
