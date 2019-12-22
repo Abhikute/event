@@ -108,15 +108,23 @@ class user_reg(models.Model):
     # compliance_check = models.BooleanField(default=True)
 
 
-
 class Images(models.Model):
     user_reg = models.ForeignKey(user_reg, on_delete=models.CASCADE, default=None)
+    event=models.ForeignKey(event,on_delete=models.CASCADE, null=True, default=None)
     image = models.ImageField(upload_to="images/",
                               verbose_name='Image')
 
+# class Images(models.Model):
+#     user_reg = models.ForeignKey(user_reg, on_delete=models.CASCADE, default=None)
+#     event=models.ForeignKey(event,on_delete=models.CASCADE, null=True, default=None)
+#     image = models.ImageField(upload_to="images/",
+#                               verbose_name='Image')
 class Videos(models.Model):
     user_reg = models.ForeignKey(user_reg,on_delete=models.CASCADE, default=None)
+    event=models.ForeignKey(event,on_delete=models.CASCADE, null=True, default=None)
     video=models.FileField(upload_to='videos/', null=True,blank=True, verbose_name="Videos")
+
+
 
 
 

@@ -47,11 +47,21 @@ def about_us(request):
 
 def user_account(request):
 	user=request.user
-	registration_details=user_reg.objects.get(user=user)
-	video_count=Videos.objects.filter(user_reg=registration_details).count()
-	images_count=Images.objects.filter(user_reg=registration_details).count()
-
-	return render(request,'user_account.html',{'registration_details':registration_details,'video_count':video_count,"images_count":images_count})
+	user_registration_details=[]
+	registration_details=user_reg.objects.filter(Email=user.email)
+	
+	for register_user in registration_details:
+		
+		video_count=Videos.objects.filter(user_reg=register_user,event=register_user.event).count()
+		images_count=Images.objects.filter(user_reg=register_user,event=register_user.event).count()
+		registration_details={
+		"register_user":register_user,
+		"image_count":images_count,
+		"video_count":video_count
+		}
+		user_registration_details.append(registration_details)
+	print (user_registration_details)
+	return render(request,'user_account.html',{'registration_details':user_registration_details})
 
 
 def events(request):
@@ -266,7 +276,7 @@ def register(request,pk=None):
 
 				images_count=len(request.FILES.getlist(key))
 				for fileimg in request.FILES.getlist(key):
-					image=Images(user_reg=event_reg,image=fileimg)
+					image=Images(user_reg=event_reg,event=event.objects.get(pk=registration_form['event_id']),image=fileimg)
 					image.save()
 
 					print (fileimg)
@@ -275,7 +285,7 @@ def register(request,pk=None):
 				video_count=len(request.FILES.getlist(key))
 				for fileimg in request.FILES.getlist(key):
 					print(fileimg)
-					video=Videos(user_reg=event_reg,video=fileimg)
+					video=Videos(user_reg=event_reg,event=event.objects.get(pk=registration_form['event_id']),video=fileimg)
 					video.save()
 
 		slot=[]

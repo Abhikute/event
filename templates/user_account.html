@@ -7,7 +7,7 @@
     <section id="innerpage">
         <div class="container wow fadeInUp">
             <div class="section-header">
-                <h2>User account details</h2>
+                <h2>{{user.first_name}},Registration</h2>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">User account</li>
@@ -24,23 +24,27 @@
                 
                     <table>
   <tr>
-    <th>User Name</th>
-    <th>Event Name</th>
-    <th>Event Category</th>
-    <th>Event Sub-Category</th>
+    <th>Register for Event</th>
+    <th>Category</th>
+    <th>Sub-Category</th>
     <th>Images uploaded</th>
     <th>videos uploaded</th>
 
 
   </tr>
+
+  
+  {%for reg in registration_details %}
   <tr>
-    <td>{{registration_details.user}}</td>
-    <td>{{registration_details.event.event_name}}</td>
-    <td>{{registration_details.event.event_category}}</td>
-    <td>{{registration_details.event_sub_category}}</td>
-    <td>{{images_count}}</td>
-    <td>{{video_count}}</td>
+   
+    <td>{{reg.register_user.event.event_name}}</td>
+    <td>{{reg.register_user.event.event_category}}</td>
+    <td>{{reg.register_user.event_sub_category}}</td>
+    <td>{{reg.image_count}}</td>
+    <td>{{reg.video_count}}</td>
   </tr>
+  {%endfor%}
+
   <!-- <tr>
     <td>Centro comercial Moctezuma</td>
     <td>Francisco Chang</td>
