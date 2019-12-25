@@ -2,6 +2,10 @@
 
 {% load static %}
 {% block content %}
+
+<div id="pageloader">
+   <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+</div>
 <div class="modal fade" id="privacypolicy" tabindex="-1" role="dialog" aria-labelledby="termsandcondi" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -637,6 +641,9 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                         </div>
                 </div>
                 <aside class="col-sm-12 col-lg-8 col-md-8 pl0  content-form">
+
+
+
                     <div class="border-box p30">
                         <div class="row">
 
@@ -1084,5 +1091,11 @@ Motion Pictures determination is contrary to these terms and conditions or by it
         });
     </script>
 
-
+<script type="text/javascript">
+    $(document).ready(function(){
+  $("#myform").on("submit", function(){
+    $("#pageloader").fadeIn();
+  });//submit
+});//document ready
+</script>
 {%endblock%}

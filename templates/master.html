@@ -24,9 +24,30 @@
     <link href="{% static 'event_reg/lib/venobox/venobox.css' %}" rel="stylesheet">
     <link href="{% static 'event_reg/lib/owlcarousel/assets/owl.theme.default.css' %}"  rel="stylesheet"/>
     <link href="{% static 'event_reg/lib/owlcarousel/assets/owl.carousel.css' %}" rel="stylesheet"/>
+    <style type="text/css">
+    	
+    	#pageloader
+{
+  background: rgba( 255, 255, 255, 0.8 );
+  display: none;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+}
+
+#pageloader img
+{
+  left: 50%;
+  margin-left: -32px;
+  margin-top: -32px;
+  position: absolute;
+  top: 50%;
+}
+    </style>
 </head>
 
-<body>
+<body id="myform">
 	<header id="header">
         <div class="container">
 
@@ -151,7 +172,8 @@
 
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
     <!-- JavaScript Libraries -->
-   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     <script src="{% static 'event_reg/lib/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'event_reg/lib/jquery/jquery-migrate.min.js' %}"></script>
     <script src="{% static 'event_reg/lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>

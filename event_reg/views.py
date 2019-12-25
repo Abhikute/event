@@ -20,8 +20,7 @@ from . import Checksum
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
-def user_regi(request):
-	return render(request,'user_registration.html')
+
 @login_required
 def home(request):
 	even=event.objects.all()
@@ -377,5 +376,3 @@ def register(request,pk=None):
 
 
 
-def terms_conditions(request):
-	return render(request,'terms&conditions.html')

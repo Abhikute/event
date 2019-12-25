@@ -22,7 +22,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user_regi/', views.user_regi,name="user_regi"),
+   
    
     path('register/', views.register, name ='register'), 
     path('about_us/', views.about_us, name ='about_us'), 
@@ -37,8 +37,7 @@ urlpatterns = [
     path(r'accounts/', include('django.contrib.auth.urls')),
     path(r'^payment/', views.payment, name='payment'),
     re_path(r'^response/(?P<user_id>\w+)/$', views.response, name='response'),
-    path(r'^terms_conditions/', views.terms_conditions, name='terms_conditions'),
-
+  
 
     
    
