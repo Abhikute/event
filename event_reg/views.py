@@ -196,40 +196,44 @@ def payment(request):
 @csrf_exempt
 def response(request, user_id):
 	if request.method == "POST":
-		MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
-		data_dict = {}
-		for key in request.POST:
-			data_dict[key] = request.POST[key]
-
-		if data_dict.get('CHECKSUMHASH', False):
-			verify = Checksum.verify_checksum(data_dict, MERCHANT_KEY, data_dict['CHECKSUMHASH'])
-		else:
-			verify = False
-		if verify:
+		try:
+			MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
+			data_dict = {}
 			for key in request.POST:
-				if key == "BANKTXNID" or key == "RESPCODE":
-					if request.POST[key]:
-						data_dict[key] = int(request.POST[key])
-					else:
-						data_dict[key] = 0
-				elif key == "TXNAMOUNT":
-					data_dict[key] = float(request.POST[key])
-			
-			# REPLACE USERNAME WITH PRIMARY KEY OF YOUR USER MODEL
-			payment=PaytmHistory.objects.create(user=User.objects.get(username=user_id), **data_dict)
-			payment.save()
-			# user=User.objects.get(username=user_id)
-			# event_registration=user_reg(PaytmHistory=PaytmHistory.objects.get(pk=payment.pk))
-			# event_registration.save()
-			# print(data_dict["event_ID"])
-			# user_update=user_reg.objects.get(Email=user.email)
-			# user_update.registration_status="completed"
-			# user_update.payment_status="Done"
-			# user_update.save()
-			if data_dict['STATUS']=='TXN_SUCCESS':
-				return render(request, "response.html", {"paytm": data_dict,"user":user_id})
+				data_dict[key] = request.POST[key]
+
+			if data_dict.get('CHECKSUMHASH', False):
+				verify = Checksum.verify_checksum(data_dict, MERCHANT_KEY, data_dict['CHECKSUMHASH'])
 			else:
-				return render(request, "response_error.html", {"paytm": data_dict,"user":user_id})
+				verify = False
+			if verify:
+				for key in request.POST:
+					if key == "BANKTXNID" or key == "RESPCODE":
+						if request.POST[key]:
+							data_dict[key] = int(request.POST[key])
+						else:
+							data_dict[key] = 0
+					elif key == "TXNAMOUNT":
+						data_dict[key] = float(request.POST[key])
+				
+				# REPLACE USERNAME WITH PRIMARY KEY OF YOUR USER MODEL
+				payment=PaytmHistory.objects.create(user=User.objects.get(username=user_id), **data_dict)
+				payment.save()
+				# user=User.objects.get(username=user_id)
+				# event_registration=user_reg(PaytmHistory=PaytmHistory.objects.get(pk=payment.pk))
+				# event_registration.save()
+				# print(data_dict["event_ID"])
+				# user_update=user_reg.objects.get(Email=user.email)
+				# user_update.registration_status="completed"
+				# user_update.payment_status="Done"
+				# user_update.save()
+				if data_dict['STATUS']=='TXN_SUCCESS':
+					return render(request, "response.html", {"paytm": data_dict,"user":user_id})
+				else:
+					return render(request, "response_error.html", {"paytm": data_dict,"user":user_id})
+
+		except:
+			return render(request,"Register-now.html")
 
 
 		else:
@@ -241,7 +245,7 @@ def response(request, user_id):
 
 @login_required
 def register(request,pk=None):
-
+    
 
 	if request.method == 'POST':
 		registration_form={}
@@ -259,16 +263,25 @@ def register(request,pk=None):
 		registration_form.pop("username",None)
 		registration_form.pop("FileUploada",None)
 
+		
+
 		registration={**registration_form}
 		print(registration_form)
-		event_reg=user_reg.objects.create(user=User.objects.get(username=request.user),event=event.objects.get(pk=registration_form['event_id']),**registration)
-		event_reg.save()
-		event_registration_id=event_reg.pk
-		# even=event(registration_form)
+		try :
+			event_reg=user_reg.objects.create(user=User.objects.get(username=request.user),event=event.objects.get(pk=registration_form['event_id']),identity_proof=request.FILES.get('ph_id_proof'),**registration)
+			event_reg.save()
+			event_registration_id=event_reg.pk
+
+		except:
+			print ()
+			form=user_geristration_form()
+			return render(request,'Register-now.html',{"form":form})
+				# even=event(registration_form)
 		# even.save()
 	
 		images_count=''
 		video_count=''
+		photo_id_proof=''
 		print (request.FILES)
 		for key in request.FILES:
 			if key=='FileUpload':
@@ -286,6 +299,16 @@ def register(request,pk=None):
 					print(fileimg)
 					video=Videos(user_reg=event_reg,event=event.objects.get(pk=registration_form['event_id']),video=fileimg)
 					video.save()
+
+			elif key=='ph_id_proof':
+				photo_id_proof=request.FILES.get(key)
+
+
+
+
+
+
+		
 
 		slot=[]
 		for i in range(0,51):

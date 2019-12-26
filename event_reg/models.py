@@ -91,6 +91,7 @@ class user_reg(models.Model):
     city=models.CharField(max_length=50,null=True,blank=True)
     state=models.CharField(max_length=50,null=True,blank=True)
     pincode=models.IntegerField(null=True,blank=True)
+    id_proof=models.CharField(max_length=50,null=True,blank=True)
     identity_proof=models.ImageField(upload_to="images/",verbose_name='identity_proof',null=True,blank=True)
     PaytmHistory=models.ForeignKey(PaytmHistory,on_delete=models.CASCADE, null=True, default=None)
     # photo1=models.ImageField(upload_to="images/",null=True,blank=True)

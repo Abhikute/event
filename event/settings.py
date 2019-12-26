@@ -25,7 +25,7 @@ SECRET_KEY = '72y6myzmylso#mny4@^0=x&2sv7#pwe!dzw*s3zz)hlrt@@w!3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['103.195.184.48','vyomamopic.com']
+ALLOWED_HOSTS = ['103.195.184.48','127.0.0.1','localhost','vyomamopic.com']
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
 MEDIA_URL = '/media/'
@@ -133,7 +133,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 PAYTM_MERCHANT_KEY = "f3Dg7!qCEu46llS!"
 PAYTM_MERCHANT_ID = "tQVQVH71689155287442"
-HOST_URL = "http://103.195.184.48:8080"
+HOST_URL = "http://127.0.0.1:8000"
 PAYTM_CALLBACK_URL = "/response/"
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 
@@ -142,7 +142,7 @@ if DEBUG:
     PAYTM_MERCHANT_KEY = "f3Dg7!qCEu46llS!"
     PAYTM_MERCHANT_ID = "tQVQVH71689155287442"
     PAYTM_WEBSITE = 'WEBSTAGING'
-    HOST_URL = 'http://103.495.184.48:8080'
+    HOST_URL = 'http://localhost:8000'
     '''
     In sandbox enviornment you can use following wallet credentials to login and make payment.
     Mobile Number : 7777777777
