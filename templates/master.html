@@ -4,6 +4,7 @@
 {% load static %}
 <head>
     <head>
+    	<style type="text/css"></style>
     <meta charset="utf-8">
     <title>Events</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -24,6 +25,9 @@
     <link href="{% static 'event_reg/lib/venobox/venobox.css' %}" rel="stylesheet">
     <link href="{% static 'event_reg/lib/owlcarousel/assets/owl.theme.default.css' %}"  rel="stylesheet"/>
     <link href="{% static 'event_reg/lib/owlcarousel/assets/owl.carousel.css' %}" rel="stylesheet"/>
+
+
+
     <style type="text/css">
     	
     	#pageloader
@@ -70,7 +74,7 @@
 
 					<ul class="dropdown-menu">
     					<li><a  href="{% url 'user_account' %}" >My Account</a></li>
-                     <li><a  href="/admin/" >Switch to admin</a></li>
+                     
                      <li><a  href="/accounts/logout/" >Logout</a></li>
 					</ul>
 
@@ -169,7 +173,12 @@
 
     </footer>
 
+    
+
 </body>
+
+
+
 
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
     <!-- JavaScript Libraries -->
@@ -213,6 +222,8 @@ $( ".owl-prev").html('<i class="fa fa-chevron-left"></i>');
  $( ".owl-next").html('<i class="fa fa-chevron-right"></i>');
         });
     </script>
+
+    
 </html>
 
 

@@ -5,6 +5,7 @@
 
 <div id="pageloader">
    <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+   <span style="width:72%"></span>
 </div>
 <div class="modal fade" id="privacypolicy" tabindex="-1" role="dialog" aria-labelledby="termsandcondi" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -514,7 +515,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
 
         </div>
     </section>
-    <main id="main" class="bg-white">
+    <main  id="main" class="bg-white">
         <div class="form-conainer">
             <div class="row">
                 <div class="col-lg-4 col-md-4 bg-white col-sm-12 hidden-xs">
@@ -645,10 +646,12 @@ Motion Pictures determination is contrary to these terms and conditions or by it
 
 
                     <div class="border-box p30">
+
                         <div class="row">
 
                             <div class="col-lg-12 col-md-12 ">
                                 <div class="white-bg">
+                                   {{error}}
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 mt-2">
                                             <form role="form" enctype="multipart/form-data" class="form-control" method='POST' action="/register/">
@@ -662,25 +665,27 @@ Motion Pictures determination is contrary to these terms and conditions or by it
 
                                                     <div class="col-lg-4 form-group  col-md-4">
                                                         <label>Event Name</label>
-                                                        <input class="form-control" type="text" name="event_name" value="{{event.event_name}}" placeholder="Event Name" />
+                                                        <input class="form-control" type="text" name="event_name" value="{{event.event_name}}" placeholder="Event Name" required/>
                                                     </div>
 
                                                     <div class="col-lg-4 col-md-4">
                                                         <label>Event Category</label>
-                                                        <div class="form-group">
+                                                       <!--  <div class="form-group">
                                                             <select name="event_category" id="event_category" size="1" onchange="menu(this.value)" class="select form-control">
                                                                 <option value="" disabled selected>Choose event category</option>
                                                     <option value="{{event.event_category}}">{{event.event_category}}</option>
 
                                                             </select>
-                                                        </div>
+                                                        </div> -->
+
+                                                        <input class="form-control" type="text" name="event_category" id="event_category" size="1"  value="{{event.event_category}}" placeholder="Event catagory" required />
                                                     </div>
 
 
                                                     <div class="col-lg-4 col-md-4">
                                                         <label>  Event Sub-Category</label>
-                                                        <div class="form-group">
-                                                            <select class="select form-control" value="{{reg_user.event_sub_category}}" name="event_sub_category" id="event_sub_category" size="1">
+                                                        <div class="form-group"> 
+                                                            <select class="select form-control" value="{{reg_user.event_sub_category}}" name="event_sub_category" onclick="menu()"id="event_sub_category" size="1" required>
                                                                 <option value="" disabled selected>Choose event Sub-category</option>
                                                                 <option></option>
 
@@ -699,7 +704,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                                                     <div class="col-lg-4 col-md-4">
                                                         <label> Gender</label>
                                                         <div class="form-group">
-                                                            <select name="gender" class="select form-control">
+                                                            <select name="gender" value="gender" class="select form-control" required>
                                                                 <option>Male</option>
                                                                 <option>Female</option>
 
@@ -708,20 +713,20 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                                                     </div>
                                                     <div class="col-lg-4 form-group  col-md-4">
                                                         <label>Age</label>
-                                                        <input name="age" class="form-control" type="number" min="7" max="99" placeholder="Enter your Age" />
+                                                        <input name="age" value="{{reg_user.age}}" class="form-control" type="number" min="7" max="99" placeholder="Enter your Age" required/>
                                                     </div>
                                                     <div class="col-lg-4 form-group  col-md-4">
                                                         <label>   Mobile</label>
-                                                        <input class="form-control" type="text" type="tel" name="mobile" pattern="[0-9]{10}" maxlength="10"  placeholder="Enter your Mobile No." />
+                                                        <input class="form-control" value="{{reg_user.mobile}}" type="text" type="tel" name="mobile" pattern="[0-9]{10}" maxlength="10"  placeholder="Enter your Mobile No." required/>
                                                     </div>
                                                     <div class="col-lg-4 form-group  col-md-4">
                                                         <label>   Alternate Mobile</label>
-                                                        <input class="form-control" type="text" type="tel" name="alternamte_mobile" pattern="[0-9]{10}" maxlength="10"  placeholder="Enter your Alternate Mobile No." />
+                                                        <input class="form-control" type="text" type="tel" name="alternamte_mobile" value="{{reg_user.alternamte_mobile}}" pattern="[0-9]{10}" maxlength="10"  placeholder="Enter your Alternate Mobile No." required/>
                                                     </div>
                                                     <div class="col-lg-4 col-md-4">
                                                         <label>   Marital Status</label>
                                                         <div class="form-group">
-                                                            <select name="marital_status" class="select form-control">
+                                                            <select name="marital_status" value="{{reg_user.marital_status}}"class="select form-control">
                                                                 <option>Married</option>
                                                                 <option>Un-Married</option>
 
@@ -731,13 +736,13 @@ Motion Pictures determination is contrary to these terms and conditions or by it
 
                                                     <div class="col-lg-4 form-group col-md-4">
                                                         <lable>Address</lable>
-                                                        <textarea   name="address" class="form-control" rows="2" placeholder="Address"></textarea>
+                                                        <textarea   name="address" value="{{reg_user.address}}"class="form-control" rows="2" placeholder="Address"></textarea required>
                                                     </div>
 
                                                     <div class="col-lg-4 col-md-4">
-                                                        <label>   State</label>
+                                                        <label>State</label>
                                                         <div class="form-group">
-                                                            <select class="select form-control" name="state" id="countrySelect" size="1" onchange="makeSubmenu(this.value)">
+                                                            <select value="{{reg_user.state}}" class="select form-control" name="state" id="countrySelect" size="1" onchange="makeSubmenu(this.value)" required>
                                                                 <option value="" disabled selected>Choose State</option>
                                                         <option>Andaman_Nicobar</option>
                                                         <option>Andhra_Pradesh</option>
@@ -779,9 +784,9 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-4">
-                                                        <label>   City</label>
+                                                        <label>City</label>
                                                         <div class="form-group">
-                                                            <select class="select form-control" name="city" id="citySelect">
+                                                            <select class="select form-control" name="city" id="citySelect" value="{{reg_user.city}}">
                                                                 <option value="" disabled selected>Choose City</option>
                                                                 <option></option>
 
@@ -790,13 +795,13 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                                                     </div>
                                                     <div class="col-lg-4 form-group  col-md-4">
                                                         <label>Pincode</label>
-                                                        <input class="form-control" type="text" name="pincode" pattern="[0-9]{6}" maxlength="6" placeholder="Enter your Pincode" />
+                                                        <input class="form-control" value="{{reg_user.pincode}}" type="text" name="pincode" pattern="[0-9]{6}" maxlength="6" placeholder="Enter your Pincode" />
                                                     </div>
 
                                                     <div class="col-lg-4 form-group  col-md-4">
                                                         <label>Selecct Id prrof</label>
                                                         <div class="form-group">
-                                                            <select class="select form-control" name="id_proof" id="id2_proof">
+                                                            <select class="select form-control" name="id_proof" id="id2_proof" required>
                                                                 <option value="" disabled selected>Choose ID prrof</option>
                                                                 <option> Pancard</option>
                                                                  <option> Aadhar card</option>
@@ -815,8 +820,9 @@ Motion Pictures determination is contrary to these terms and conditions or by it
 
                                                      <div class="col-lg-4 form-group  col-md-4">
                                                         <label>Upload ID proof</label>
-                                                        <input class="form-control" type="file" name="ph_id_proof" />
+                                                        <input class="form-control" type="file" name="ph_id_proof" required/>
                                                     </div>
+                      
 
 
 
@@ -845,7 +851,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                                                     </div> -->
 
 
-                                                    <div class="col-lg-6 form-group  col-md-6">
+                                                    <!-- <div class="col-lg-6 form-group  col-md-6">
                                                         <div class="row" id="photo">
                                                             <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                                                 <div class=" bg-white border-box2 ">
@@ -914,7 +920,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group row">
                                                     <div class="col-lg-12 text-black text-black w-bg text-bold mb-3 text-center">
 
@@ -925,7 +931,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                                                     </div>
                                                     <div class="col-lg-12 text-center">
                                                         <input type="reset" class="btn btn-secondary" data-dismiss="modal" aria-label="Close" value="Cancel" />
-                                                        <input type="submit" class="btn btn-primary" value="Submit" />
+                                                        <input type="submit" class="btn btn-primary" value="Next" />
                                                     </div>
                                                 </div>
                                             </form>
@@ -944,7 +950,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
     </main>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script>
+<!--     <script>
 
         var fileCount = 0;
 
@@ -972,11 +978,11 @@ Motion Pictures determination is contrary to these terms and conditions or by it
             fileCount += files.length;
             showFileCount();
         });
-    </script>
+    </script> -->
 
 
 
-    <script>
+  <!--   <script>
         var fileCounta = 0;
         var showFileCounta = function () {
             $('#file_counta').text('Files selected: ' + fileCounta);
@@ -1006,7 +1012,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
 
 
 
-</script>
+</script> -->
 
   <script type="text/javascript">
         var ev_sub_category = {
@@ -1020,7 +1026,9 @@ Motion Pictures determination is contrary to these terms and conditions or by it
 
 
         }
-        function menu(value) {
+        function menu() {
+            
+            var value= '{{event.event_category}}';
             if (value.length == 0) document.getElementById("event_sub_category").innerHTML = "<option></option>";
             else {
                 var citiesOptions = "";
@@ -1102,7 +1110,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
         }
     </script>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(document).ready(function () {
             $("#event_category").change(function () {
                 if ($(this).val() == "Photography") {
@@ -1117,7 +1125,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
             });
             $("#photo").show();
         });
-    </script>
+    </script> -->
 
 <script type="text/javascript">
     $(document).ready(function(){

@@ -32,6 +32,7 @@ class event(models.Model):
     event_end_date=models.DateField(auto_now=False, auto_now_add=False)
     event_discription=models.TextField(blank=True,null=True)
     event_address=models.TextField(blank=True,null=True)
+    event_instructuions=models.TextField(blank=True,null=True)
     event_highlight1=models.TextField(blank=True,null=True)
     event_highlight2=models.TextField(blank=True,null=True)
     event_highlight3=models.TextField(blank=True,null=True)

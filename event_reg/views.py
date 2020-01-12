@@ -9,7 +9,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
 
-from django.core.mail import EmailMessage
+from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from .models import event,user_reg,PaytmHistory,Images,Videos
 import json
@@ -26,7 +26,11 @@ def home(request):
 	even=event.objects.all()
 
 	return render(request,'index.html',{"event":even})
-
+def username_present(user_email,event_sub_category,event):
+    if user_reg.objects.filter(Email=user_email,event_sub_category=event_sub_category,event=event).exists():
+        return True
+    
+    return False
 def index(request):
 	even=event.objects.all()
 
@@ -50,13 +54,16 @@ def user_account(request):
 	registration_details=user_reg.objects.filter(Email=user.email)
 	
 	for register_user in registration_details:
-		
-		video_count=Videos.objects.filter(user_reg=register_user,event=register_user.event).count()
-		images_count=Images.objects.filter(user_reg=register_user,event=register_user.event).count()
+		video=Videos.objects.filter(user_reg=register_user,event=register_user.event)
+		image=Images.objects.filter(user_reg=register_user,event=register_user.event)
+		video_count=video.count()
+		images_count=image.count()
 		registration_details={
 		"register_user":register_user,
 		"image_count":images_count,
-		"video_count":video_count
+		"video_count":video_count,
+		"image":image,
+		"video":video
 		}
 		user_registration_details.append(registration_details)
 	print (user_registration_details)
@@ -95,6 +102,8 @@ def events(request):
 def services(request):
 	return render(request,'services.html')
 
+
+
 def event_details(request,pk=None):
 	if pk:
 		even=event.objects.get(pk=pk)
@@ -128,10 +137,10 @@ def usersignup(request):
 				'uid': urlsafe_base64_encode(force_bytes(user.pk)),
 				'token': account_activation_token.make_token(user),
 			})
-			to_email = form.cleaned_data.get('email')
+			to_email = str(form.cleaned_data.get('email'))
 			print("Uid",urlsafe_base64_encode(force_bytes(user.pk)),"Token:",account_activation_token.make_token(user))
-			email = EmailMessage(email_subject, message, to=[to_email])
-			email.send()
+			send_mail(email_subject, message,'info@vyomamotionpictures.com',[to_email])
+			# email.send()
 			note='We have sent you an email, please confirm your email address to complete registration'
 			return render(request,'registration/response.html',{"note":note})
 	else:
@@ -165,7 +174,8 @@ def login(request):
 
 
 @login_required
-def payment(request):
+def payment(request,bill_amount=None):
+	
 	user = request.user
 	settings.USER = user
 	MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
@@ -175,7 +185,7 @@ def payment(request):
 	# Generating unique temporary ids
 	order_id = Checksum.__id_generator__()
 
-	bill_amount = 100
+	bill_amount = bill_amount
 	if bill_amount:
 		data_dict = {
 			'MID': MERCHANT_ID,
@@ -189,8 +199,9 @@ def payment(request):
 		}
 		param_dict = data_dict
 		param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
-		return render(request, "payment.html", {'paytmdict': param_dict, 'user': user})
-	return HttpResponse("Bill Amount Could not find. ?bill_amount=10")
+
+		return param_dict
+	return "error "
 
 # @login_required
 @csrf_exempt
@@ -227,8 +238,11 @@ def response(request, user_id):
 				# user_update.registration_status="completed"
 				# user_update.payment_status="Done"
 				# user_update.save()
+				print (data_dict)
 				if data_dict['STATUS']=='TXN_SUCCESS':
 					return render(request, "response.html", {"paytm": data_dict,"user":user_id})
+				elif data_dict['BANKTXNID']==0:
+					return render('FileUpload.html')
 				else:
 					return render(request, "response_error.html", {"paytm": data_dict,"user":user_id})
 
@@ -242,12 +256,61 @@ def response(request, user_id):
 		return HttpResponse("Method \"GET\" not allowed")
 
 	return HttpResponse(status=200)
+def FileUpload(request,pk=None,id=None):
+	if request.method == 'POST':
+		id=id
+		pk=pk
+		print(pk,id)
+		if pk==None or id==None:
+			id=request.POST.get('event_id')
+			pk=request.POST.get('event_pk')
+			print(id,pk)
+		for key in request.FILES:
+			if key=='FileUpload':
+				if request.FILES[key]:
+					
+
+				
+					for fileimg in request.FILES.getlist(key):
+						image=Images(user_reg=user_reg.objects.get(pk=id),event=event.objects.get(pk=pk),image=fileimg)
+						image.save()
+
+						
+					
+			elif key=='FileUploada':
+				if request.FILES[key]:
+								
+					for fileimg in request.FILES.getlist(key):
+						# print(fileimg)
+						video=Videos(user_reg=user_reg.objects.get(pk=id),event=event.objects.get(pk=pk),video=fileimg)
+						video.save()
+
+		
+		billing_amount=request.POST.get('data')
+
+		request=request
+		
+		return render(request, "payment.html", {'paytmdict': payment(request,billing_amount), 'user': request.user})
+	
+	eve=event.objects.get(pk=pk)
+	image_count=Images.objects.filter(user_reg=user_reg.objects.get(pk=id)).count()
+	video_count=Videos.objects.filter(user_reg=user_reg.objects.get(pk=id)).count()
+	if image_count==0 and video_count==0 :
+		image_count=0
+		video_count=0
+
+	else:
+		image_count=image_count
+		video_count=video_count
+	return render(request,'fileUpload.html',{"event":eve,"image_count":image_count,"video_count":video_count})
+
 
 @login_required
 def register(request,pk=None):
     
 
 	if request.method == 'POST':
+
 		registration_form={}
 		file={}
 		
@@ -257,145 +320,69 @@ def register(request,pk=None):
 
 		
 		registration_form.pop("csrfmiddlewaretoken", None)
-		registration_form.pop("event_name", None)
+		# registration_form.pop("event_name", None)
 		registration_form.pop("event_category", None)
 		registration_form.pop("FileUpload", None)
 		registration_form.pop("username",None)
 		registration_form.pop("FileUploada",None)
+		print(registration_form)
+		pk=registration_form['event_id']
+		print(pk)
+		eve=event.objects.get(pk=pk)
 
 		
-
-		registration={**registration_form}
 		print(registration_form)
+
+		
 		try :
-			event_reg=user_reg.objects.create(user=User.objects.get(username=request.user),event=event.objects.get(pk=registration_form['event_id']),identity_proof=request.FILES.get('ph_id_proof'),**registration)
-			event_reg.save()
-			event_registration_id=event_reg.pk
+			if username_present(registration_form['Email'],registration_form['event_sub_category'],eve)==True:
+				error_msg='Error:You are already registered for {}'.format(registration_form['event_name'] +' event with ' +registration_form['event_sub_category']+' sub-category')
+				raise Exception(error_msg)
+			
+			else:
+				registration_form.pop("event_name", None)
+				registration={**registration_form}
+				event_reg=user_reg.objects.create(user=User.objects.get(username=request.user),event=event.objects.get(pk=registration_form['event_id']),identity_proof=request.FILES.get('ph_id_proof'),**registration)
+				event_reg.save()
+			
+		except Exception as error:
+			print(error)
+			pk=registration_form['event_id']
+			return render(request,'Register-now.html',{"event":eve,"error":error})
+			
+
 
 		except:
-			print ()
-			form=user_geristration_form()
-			return render(request,'Register-now.html',{"form":form})
-				# even=event(registration_form)
-		# even.save()
+			print ("restless")
+			pk=registration_form['event_id']
+			return render(request,'Register-now.html',{"event":eve,"error":error})
+			
+		return redirect('FileUpload',pk=pk, id=event_reg.pk) 
+
+
 	
-		images_count=''
-		video_count=''
-		photo_id_proof=''
-		print (request.FILES)
-		for key in request.FILES:
-			if key=='FileUpload':
-
-				images_count=len(request.FILES.getlist(key))
-				for fileimg in request.FILES.getlist(key):
-					image=Images(user_reg=event_reg,event=event.objects.get(pk=registration_form['event_id']),image=fileimg)
-					image.save()
-
-					print (fileimg)
-					
-			elif key=='FileUploada':
-				video_count=len(request.FILES.getlist(key))
-				for fileimg in request.FILES.getlist(key):
-					print(fileimg)
-					video=Videos(user_reg=event_reg,event=event.objects.get(pk=registration_form['event_id']),video=fileimg)
-					video.save()
-
-			elif key=='ph_id_proof':
-				photo_id_proof=request.FILES.get(key)
-
-
-
-
-
-
 		
-
-		slot=[]
-		for i in range(0,51):
-			slot.append(i)
-
-		# print (slot)
-		list = [slot[i:i+3] for i in range(0, len(slot), 3)]
-		# print (list)
-
-		y=images_count
-		for x in list:
-			if y in x:
-				number=list.index(x)
-		# print (number,y)
-		if images_count:
-			if number==0:
-				bill_amount=1000
-			else:
-				bill_amount =1000+(500*(number-1))
-
-		elif video_count:
-			if video_count==1:
-				bill_amount=1000
-			else:
-				bill_amount=1000+(500*(video_count-1))
-
-		# if images_count in range (1,5) or video_count==1:
-		# 	bill_amount=1000
-		# elif images_count in range==6 or images_count==7 or images_count==8:
-		# 	bill_amount=1000+500
-
-		# elif images_count==9 or images_count==10 :
-
-		# 	bill_amount=2000
-
-		# else :
-		# 	bill_amount=(500*images_count) or (500+(500*video_count))
-
-
-
-		user = request.user
-		settings.USER = user
-		MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
-		MERCHANT_ID = settings.PAYTM_MERCHANT_ID
-		# REPLACE USERNAME WITH PRIMARY KEY OF YOUR USER MODEL
-		CALLBACK_URL = settings.HOST_URL + settings.PAYTM_CALLBACK_URL + request.user.username + '/'
-		# Generating unique temporary ids
-		order_id = Checksum.__id_generator__()
-
-		# bill_amount = 100
-		if bill_amount:
-			data_dict = {
-				'MID': MERCHANT_ID,
-				'ORDER_ID': order_id,
-				'TXN_AMOUNT': bill_amount,
-				'CUST_ID': user.email,
-				'INDUSTRY_TYPE_ID': 'Retail',
-				'WEBSITE': settings.PAYTM_WEBSITE,
-				'CHANNEL_ID': 'WEB',
-				'CALLBACK_URL': CALLBACK_URL,
-				
-
-			}
-			param_dict = data_dict
-			param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
-			param_dict['event_ID']=event_registration_id
-			return render(request, "payment.html", {'paytmdict': param_dict, 'user': user})
-		return HttpResponse("Bill Amount Could not find. ?bill_amount=10")
-		# registration_form.pop("csrfmiddlewaretoken", None)
-		# print(event_id,event_name,event_category,event_sub_category,first_name,Last_name,Email,gender,age,mobile,alternamte_mobile,marital_status,birthdate,address,city,state,pincode,photo,videofile)
-	
 	if pk:
 		even=event.objects.get(pk=pk)
 		try:
-			# reg_user=user_reg.objects.get(Email=request.user.email)
-			print (reg_user.Email)
+			reg_user=user_reg.objects.get(Email=request.user.email)
+			print ("regrister_user_id",request.user.email)
 		except:
 			reg_user=None
+			print ("banddddddd")
 			pass
-		form=user_geristration_form()
+		
 
-		return render(request,'Register-now.html',{"event":even,"form":form,"reg_user":reg_user})
-
-
-	form=user_geristration_form()
-	return render(request,'Register-now.html',{"form":form})
+		return render(request,'Register-now.html',{"event":even,"reg_user":reg_user})
 
 
+	try:
+			reg_user=user_reg.objects.get(Email=request.user.email)
+			print ("regrister_user_id",request.user.email)
+	except:
+			reg_user=None
+			print ("banddddddd")
+			pass
+	return render(request,'Register-now.html',{"reg_user":reg_user})
 
 

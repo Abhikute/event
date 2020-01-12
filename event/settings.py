@@ -126,7 +126,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
 MEDIA_URL = '/media/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -151,8 +151,9 @@ if DEBUG:
     This test wallet is topped-up to a balance of 7000 Rs. every 5 minutes.
     '''
 
-EMAIL_HOST = 'mail.vyomamopic.com'
+EMAIL_HOST = '103.21.59.173'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = '_mainaccount@vyomamopic.com'
-EMAIL_HOST_PASSWORD = 'XbH]b@4V6(e^'
+EMAIL_HOST_USER = 'info@vyomamotionpictures.com'
+EMAIL_HOST_PASSWORD = 'vPPM[%8$w0nA'
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

@@ -13,6 +13,6 @@ urlpatterns = [
         url(r'^$', view.index, name='index'), 
         url(r'^event_details/(?P<pk>\d+)/$', view.event_details, name ='event_details_with_pk'),
         url(r'^register/(?P<pk>\d+)/$', view.register, name ='register_with_pk'),
-        
+        url(r'^FileUpload/(?P<pk>\d+)/(?P<id>\d+)$', view.FileUpload, name ='FileUpload'),
        url('^',include('django.contrib.auth.urls'))
 ]

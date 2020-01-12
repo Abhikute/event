@@ -21,55 +21,54 @@
 
                 <div class="row">
 
-                
+               
                     <table>
   <tr>
+     <th>Registratrion ID</th>
     <th>Register for Event</th>
     <th>Category</th>
     <th>Sub-Category</th>
-    <th>Images uploaded</th>
-    <th>videos uploaded</th>
+    <th>Total Images uploaded</th>
+    <th>Images</th>
+    <th>Total Videos Uploaded</th>
+     <th>videos</th>
+    <th>upload files</th>
 
 
   </tr>
 
   
   {%for reg in registration_details %}
+ 
+  
+      {% csrf_token %}
   <tr>
-   
+    <td>{{reg.register_user.id}} </td>
     <td>{{reg.register_user.event.event_name}}</td>
     <td>{{reg.register_user.event.event_category}}</td>
     <td>{{reg.register_user.event_sub_category}}</td>
     <td>{{reg.image_count}}</td>
-    <td>{{reg.video_count}}</td>
+    <td>{%for image in reg.image%}
+       <iframe width="200" height="200"
+src="/media/{{image.image}}">
+</iframe>
+
+    {%endfor%}
+  </td>
+    <td>{{reg.video_count}} </td>
+     <td>{%for video in reg.video%}
+      <iframe width="200" height="200"
+src="/media/{{video.video}}">
+</iframe>
+    {%endfor%}</td>
+    
+    <td><a href="{% url 'FileUpload' pk=reg.register_user.event.pk  id=reg.register_user.id %}">Upload Files</a></td>
   </tr>
+
+ 
   {%endfor%}
 
-  <!-- <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-  <tr>
-    <td>Ernst Handel</td>
-    <td>Roland Mendel</td>
-    <td>Austria</td>
-  </tr>
-  <tr>
-    <td>Island Trading</td>
-    <td>Helen Bennett</td>
-    <td>UK</td>
-  </tr>
-  <tr>
-    <td>Laughing Bacchus Winecellars</td>
-    <td>Yoshi Tannamuri</td>
-    <td>Canada</td>
-  </tr>
-  <tr>
-    <td>Magazzini Alimentari Riuniti</td>
-    <td>Giovanni Rovelli</td>
-    <td>Italy</td>
-  </tr> -->
+
 </table>
                     
                 </div>
@@ -96,8 +95,6 @@ td, th {
   padding: 8px;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
+
 </style>
     {%endblock%}
