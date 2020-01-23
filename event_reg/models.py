@@ -47,37 +47,12 @@ class event(models.Model):
     event_photo6=models.ImageField(upload_to="images/",null=True,blank=True)
     event_photo7=models.ImageField(upload_to="images/",null=True,blank=True)    
 
-class PaytmHistory(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='rel_payment_paytm', on_delete=models.CASCADE, null=True, default=None)
-    # user_reg=models.ForeignKey(user_reg,on_delete=models.CASCADE, null=True, default=None)
-    ORDERID = models.CharField('ORDER ID', max_length=30)
-    TXNDATE = models.DateTimeField('TXN DATE', default=timezone.now)
-    TXNID = models.CharField('TXN ID', max_length=64)
-    BANKTXNID = models.IntegerField('BANK TXN ID', null=True, blank=True)
-    BANKNAME = models.CharField('BANK NAME', max_length=50, null=True, blank=True)
-    RESPCODE = models.IntegerField('RESP CODE')
-    PAYMENTMODE = models.CharField('PAYMENT MODE', max_length=10, null=True, blank=True)
-    CURRENCY = models.CharField('CURRENCY', max_length=4, null=True, blank=True)
-    GATEWAYNAME = models.CharField("GATEWAY NAME", max_length=30, null=True, blank=True)
-    MID = models.CharField(max_length=40)
-    RESPMSG = models.TextField('RESP MSG', max_length=250)
-    TXNAMOUNT = models.FloatField('TXN AMOUNT')
-    STATUS = models.CharField('STATUS', max_length=12)
 
-    class Meta:
-        app_label = 'event_reg'
-        unique_together = (("ORDERID", "TXNID"),)
-
-    def __unicode__(self):
-        return self.STATUS
 
 
 class user_reg(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, default=None)
     event=models.ForeignKey(event,on_delete=models.CASCADE, null=True, default=None)
-    # event_id=models.CharField(max_length=100,null=True,blank=True)
-    # event_name=models.CharField(max_length=100,null=True,blank=True)
-    # event_category=models.CharField(max_length=80,null=True,blank=True)
     event_sub_category=models.CharField(max_length=80,null=True,blank=True)
     first_name=models.CharField(max_length=125,null=True,blank=True)
     Last_name=models.CharField(max_length=125,null=True,blank=True)
@@ -94,33 +69,43 @@ class user_reg(models.Model):
     pincode=models.IntegerField(null=True,blank=True)
     id_proof=models.CharField(max_length=50,null=True,blank=True)
     identity_proof=models.ImageField(upload_to="images/",verbose_name='identity_proof',null=True,blank=True)
-    PaytmHistory=models.ForeignKey(PaytmHistory,on_delete=models.CASCADE, null=True, default=None)
-    # photo1=models.ImageField(upload_to="images/",null=True,blank=True)
-    # photo2=models.ImageField(upload_to="images/",null=True,blank=True)
-    # photo3=models.ImageField(upload_to="images/",null=True,blank=True)
-    # photo4=models.ImageField(upload_to="images/",null=True,blank=True)
-    # photo5=models.ImageField(upload_to="images/",null=True,blank=True)
-    # videofile1= models.FileField(upload_to='videos/', null=True,blank=True, verbose_name="")
-    # videofile2= models.FileField(upload_to='videos/', null=True,blank=True, verbose_name="")
-    # videofile3= models.FileField(upload_to='videos/', null=True,blank=True, verbose_name="")
-    # videofile4= models.FileField(upload_to='videos/', null=True,blank=True, verbose_name="")
-    # videofile5= models.FileField(upload_to='videos/', null=True,blank=True, verbose_name="")
-    # registration_status=models.CharField(max_length=100,null=True,blank=True)
-    # payment_status=models.CharField(max_length=100,null=True,blank=True)
-    # compliance_check = models.BooleanField(default=True)
+   
+  
+class PaytmHistory(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='rel_payment_paytm', on_delete=models.CASCADE, null=True, default=None)
+    # user_reg = models.ForeignKey(user_reg, on_delete=models.CASCADE, default=None)
+    ORDERID = models.CharField('ORDER ID', max_length=30)
+    TXNDATE = models.DateTimeField('TXN DATE', default=timezone.now)
+    TXNID = models.CharField('TXN ID', max_length=64)
+    BANKTXNID = models.IntegerField('BANK TXN ID', null=True, blank=True)
+    BANKNAME = models.CharField('BANK NAME', max_length=50, null=True, blank=True)
+    RESPCODE = models.IntegerField('RESP CODE')
+    PAYMENTMODE = models.CharField('PAYMENT MODE', max_length=10, null=True, blank=True)
+    CURRENCY = models.CharField('CURRENCY', max_length=4, null=True, blank=True)
+    GATEWAYNAME = models.CharField("GATEWAY NAME", max_length=30, null=True, blank=True)
+    MID = models.CharField(max_length=40)
+    RESPMSG = models.TextField('RESP MSG', max_length=250)
+    TXNAMOUNT = models.FloatField('TXN AMOUNT')
+    STATUS = models.CharField('STATUS', max_length=12)
+    user_reg=models.ForeignKey(user_reg,on_delete=models.CASCADE, null=True, default=None)
 
+    class Meta:
+        app_label = 'event_reg'
+        unique_together = (("ORDERID", "TXNID"),)
 
+    def __unicode__(self):
+        return self.STATUS
 class Images(models.Model):
     user_reg = models.ForeignKey(user_reg, on_delete=models.CASCADE, default=None)
     event=models.ForeignKey(event,on_delete=models.CASCADE, null=True, default=None)
     image = models.ImageField(upload_to="images/",
                               verbose_name='Image')
 
-# class Images(models.Model):
-#     user_reg = models.ForeignKey(user_reg, on_delete=models.CASCADE, default=None)
-#     event=models.ForeignKey(event,on_delete=models.CASCADE, null=True, default=None)
-#     image = models.ImageField(upload_to="images/",
-#                               verbose_name='Image')
+class Temp_Images(models.Model):
+    user_reg_id = models.IntegerField()
+    image = models.ImageField(upload_to="temp_images/",
+                              verbose_name='Image')
+
 class Videos(models.Model):
     user_reg = models.ForeignKey(user_reg,on_delete=models.CASCADE, default=None)
     event=models.ForeignKey(event,on_delete=models.CASCADE, null=True, default=None)
@@ -128,7 +113,10 @@ class Videos(models.Model):
 
 
 
-
+class Temp_Videos(models.Model):
+    user_reg_id = models.IntegerField() 
+    video = models.ImageField(upload_to="temp_videos/",
+                              verbose_name='Image')
 
    
 

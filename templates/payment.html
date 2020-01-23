@@ -2,7 +2,29 @@
 
 {% load static %}
 {% block content %}
+<!-- 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script >
+   var paytmdict='{{paytmdict}}';
+  Swal.fire({
+  title: "Transaction is being processed", 
+  html: "<form method='post' action='https://securegw-stage.paytm.in/theia/processTransaction' name='f1'>"+
+        "<table border='1'><tbody>"+
+               
+            "{% for key,value in paytmdict.items %}"+
+               " <input type='hidden' name='{{key}}'' value='{{value}}'>"+
+           " {% endfor %}"+
+            "</tbody>"+
+        "</table>"+
+       "<button>Submit</button>"+
 
+        "</form>", 
+        confirmButtonText: "Submit" 
+  
+});
+
+
+</script> -->
        <p>{{user}}</p>
         <table align='center'>
             <tr>

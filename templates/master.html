@@ -96,7 +96,7 @@
                     <li><a href="{% url 'services' %}">Services</a></li>
                     <li><a href="{% url 'events' %}">Events</a></li>
                     <li><a href="{% url 'contact' %}">Contact</a></li>
-                    <li><a  href="{% url 'register_user' %}"  >Sign-Up</a></li>
+                    <li><a  href="{% url 'register_user' %}" onclick="fn()" >Sign-Up</a></li>
                     <li><a  href="{% url 'login' %}"  >Sign-in</a></li>
                     <!-- <li class="nav-item dropdown">
                         <a  data-toggle="dropdown"  href="#" class="nav-link dropdown-toggle" href="{% url 'login' %}" >Sign-in</a>
@@ -168,7 +168,7 @@
             </div>
         </div>
         <div class="copyright">
-            <small> &copy; Copyright <strong>Vyoma Motion pictures</strong>. All Rights Reserved</small>
+            <small> &copy; Copyright <strong>Vyoma Motion pictures</strong>. All Rights Reserved  developed by Abhijit Kute </small>
         </div>
 
     </footer>
@@ -222,6 +222,8 @@ $( ".owl-prev").html('<i class="fa fa-chevron-left"></i>');
  $( ".owl-next").html('<i class="fa fa-chevron-right"></i>');
         });
     </script>
+
+    
 
     
 </html>

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect 
 from .forms import user_geristration_form,SignUpForm
-from django.http import HttpResponse 
+from django.http import HttpResponse ,HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -11,16 +11,16 @@ from .tokens import account_activation_token
 
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
-from .models import event,user_reg,PaytmHistory,Images,Videos
+from .models import event,user_reg,PaytmHistory,Images,Videos,Temp_Videos,Temp_Images
 import json
-from django.db.models import Q
+from django.db.models import Q,Sum
 from django.conf import settings
 from django.utils.decorators import method_decorator
 from . import Checksum
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-# Create your views here.
-
+import requests
+file_dict={}
 @login_required
 def home(request):
 	even=event.objects.all()
@@ -56,6 +56,9 @@ def user_account(request):
 	for register_user in registration_details:
 		video=Videos.objects.filter(user_reg=register_user,event=register_user.event)
 		image=Images.objects.filter(user_reg=register_user,event=register_user.event)
+		payment_history=PaytmHistory.objects.filter(user_reg=register_user)
+		amount=payment_history.aggregate(Sum('TXNAMOUNT'))
+		
 		video_count=video.count()
 		images_count=image.count()
 		registration_details={
@@ -63,7 +66,9 @@ def user_account(request):
 		"image_count":images_count,
 		"video_count":video_count,
 		"image":image,
-		"video":video
+		"video":video,
+		"amount":amount,
+		"Payment_resp":payment_history
 		}
 		user_registration_details.append(registration_details)
 	print (user_registration_details)
@@ -174,17 +179,17 @@ def login(request):
 
 
 @login_required
-def payment(request,bill_amount=None):
+def payment(request,bill_amount=None,user_reg=None):
 	
 	user = request.user
 	settings.USER = user
 	MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
 	MERCHANT_ID = settings.PAYTM_MERCHANT_ID
 	# REPLACE USERNAME WITH PRIMARY KEY OF YOUR USER MODEL
-	CALLBACK_URL = settings.HOST_URL + settings.PAYTM_CALLBACK_URL + request.user.username + '/'
+	CALLBACK_URL = settings.HOST_URL + settings.PAYTM_CALLBACK_URL + request.user.username +'/'+user_reg+'/'
 	# Generating unique temporary ids
 	order_id = Checksum.__id_generator__()
-
+	print(CALLBACK_URL)
 	bill_amount = bill_amount
 	if bill_amount:
 		data_dict = {
@@ -192,6 +197,7 @@ def payment(request,bill_amount=None):
 			'ORDER_ID': order_id,
 			'TXN_AMOUNT': bill_amount,
 			'CUST_ID': user.email,
+			"MOBILE_NO":"7777777777",
 			'INDUSTRY_TYPE_ID': 'Retail',
 			'WEBSITE': settings.PAYTM_WEBSITE,
 			'CHANNEL_ID': 'WEB',
@@ -205,9 +211,13 @@ def payment(request,bill_amount=None):
 
 # @login_required
 @csrf_exempt
-def response(request, user_id):
+def response(request, user_id,id):
 	if request.method == "POST":
-		try:
+		# try:
+			
+			event_id=user_reg.objects.get(pk=id).event.pk
+			print(event_id)
+			
 			MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
 			data_dict = {}
 			for key in request.POST:
@@ -227,74 +237,138 @@ def response(request, user_id):
 					elif key == "TXNAMOUNT":
 						data_dict[key] = float(request.POST[key])
 				
-				# REPLACE USERNAME WITH PRIMARY KEY OF YOUR USER MODEL
-				payment=PaytmHistory.objects.create(user=User.objects.get(username=user_id), **data_dict)
-				payment.save()
-				# user=User.objects.get(username=user_id)
-				# event_registration=user_reg(PaytmHistory=PaytmHistory.objects.get(pk=payment.pk))
-				# event_registration.save()
-				# print(data_dict["event_ID"])
-				# user_update=user_reg.objects.get(Email=user.email)
-				# user_update.registration_status="completed"
-				# user_update.payment_status="Done"
-				# user_update.save()
-				print (data_dict)
+				# FileUpload(request,pk=event_id, id=id,data_dict=data_dict)
 				if data_dict['STATUS']=='TXN_SUCCESS':
-					return render(request, "response.html", {"paytm": data_dict,"user":user_id})
-				elif data_dict['BANKTXNID']==0:
-					return render('FileUpload.html')
+					email_subject="Registration confirmed"
+					message='Congratulations your event registration has been completed successfully'
+					to_email='abhijitkute6264@gmail.com'
+					user_regi=user_reg.objects.get(pk=id)
+					Event=event.objects.get(pk=event_id)
+					if Event.event_category=='Photography':
+						temp_files=Temp_Images.objects.filter(user_reg_id=id)
+						for file in temp_files:
+							Image_file=Images(user_reg=user_regi,event=Event,image=file.image)
+							Image_file.save()
+					else:
+						temp_files=Temp_Videos.objects.filter(user_reg_id=id)
+				
+						for file in temp_files:
+							Video_file=Videos(user_reg=user_regi,event=Event,video=file.video)
+							Video_file.save()
+					temp_files.delete()
+
+
+					payment_deatil=PaytmHistory.objects.create(user=User.objects.get(username=user_regi.user), user_reg=user_regi,**data_dict)
+					payment_deatil.save()
+					
+					send_mail(email_subject, message,'info@vyomamotionpictures.com',[to_email])
+					message="Transaction ID:"+data_dict['TXNID']+"Order ID:"+data_dict['ORDERID']
+					title_message="Event Registration Completed"
+					return render(request,"response.html", {"event": event.objects.all(),"title_message":title_message,"message":message})
+					
+				elif data_dict['STATUS']=='TXN_FAILURE':
+					return HttpResponseRedirect("/FileUpload/"+str(event_id)+"/"+str(id))
 				else:
-					return render(request, "response_error.html", {"paytm": data_dict,"user":user_id})
+					return render(request, "response_error.html", {"paytm": data_dict})
+				
+				
 
-		except:
-			return render(request,"Register-now.html")
+		# except:
+		# 	return HttpResponse("response return")
 
 
-		else:
-			return HttpResponse("checksum verify failed")
+		# else:
+		# 	return HttpResponse("checksum verify failed")
 	else:
 		return HttpResponse("Method \"GET\" not allowed")
 
 	return HttpResponse(status=200)
 def FileUpload(request,pk=None,id=None):
+		
 	if request.method == 'POST':
 		id=id
 		pk=pk
-		print(pk,id)
+		
+		billing_amount=request.POST.get('data')
+		# url = 'https://securegw-stage.paytm.in/theia/processTransaction'
+		# myobj = payment(request,billing_amount,id)
+		# print (myobj)
+		# headers = {'content-type': 'application/json'} 
+		# response=requests.post(url,  data = json.dumps(myobj),headers=headers)
+		# response = requests.post(url, data = post_data, headers = {"Content-type": "application/json"}).json()
+
+		print ("###############################",billing_amount)
 		if pk==None or id==None:
 			id=request.POST.get('event_id')
 			pk=request.POST.get('event_pk')
-			print(id,pk)
+			
+
+		if billing_amount==str(0) and request.FILES:
+			for key in request.FILES:
+				if key=='FileUpload':
+					if request.FILES[key]:
+					
+					
+
+				
+						for fileimg in request.FILES.getlist(key):
+							# file_dict[id]=fileimg
+							Image_file=Images(user_reg=user_reg.objects.get(pk=id),event=event.objects.get(pk=pk),image=fileimg)
+							Image_file.save()
+
+						
+					
+				elif key=='FileUploada':
+					if request.FILES[key]:
+							
+						for fileimg in request.FILES.getlist(key):
+							# file_dict[id]=fileimg
+							
+							Video_file=Videos(user_reg=user_reg.objects.get(pk=id),event=event.objects.get(pk=pk),video=fileimg)
+							Video_file.save()
+
+
+			message="Images count in between 1-6 hence charges not applied"
+			title_message="Images Uploaded Successfully"
+			return render(request,"response.html", {"event": event.objects.all(),"title_message":title_message,"message":message})
 		for key in request.FILES:
 			if key=='FileUpload':
 				if request.FILES[key]:
 					
+					
 
 				
 					for fileimg in request.FILES.getlist(key):
-						image=Images(user_reg=user_reg.objects.get(pk=id),event=event.objects.get(pk=pk),image=fileimg)
+						# file_dict[id]=fileimg
+						image=Temp_Images(user_reg_id=id,image=fileimg)
 						image.save()
 
 						
 					
 			elif key=='FileUploada':
 				if request.FILES[key]:
-								
+							
 					for fileimg in request.FILES.getlist(key):
-						# print(fileimg)
-						video=Videos(user_reg=user_reg.objects.get(pk=id),event=event.objects.get(pk=pk),video=fileimg)
+						# file_dict[id]=fileimg
+						
+						video=Temp_Videos(user_reg_id=id,video=fileimg)
 						video.save()
 
 		
-		billing_amount=request.POST.get('data')
+		
 
 		request=request
 		
-		return render(request, "payment.html", {'paytmdict': payment(request,billing_amount), 'user': request.user})
+		return render(request, "payment.html", {'paytmdict': payment(request,billing_amount,id), 'user': request.user})
+	
 	
 	eve=event.objects.get(pk=pk)
+	Temp_Videos.objects.filter(user_reg_id=id).delete()
+	Temp_Images.objects.filter(user_reg_id=id).delete()
+	
 	image_count=Images.objects.filter(user_reg=user_reg.objects.get(pk=id)).count()
 	video_count=Videos.objects.filter(user_reg=user_reg.objects.get(pk=id)).count()
+
 	if image_count==0 and video_count==0 :
 		image_count=0
 		video_count=0
@@ -369,7 +443,7 @@ def register(request,pk=None):
 			print ("regrister_user_id",request.user.email)
 		except:
 			reg_user=None
-			print ("banddddddd")
+			
 			pass
 		
 
@@ -381,7 +455,7 @@ def register(request,pk=None):
 			print ("regrister_user_id",request.user.email)
 	except:
 			reg_user=None
-			print ("banddddddd")
+			
 			pass
 	return render(request,'Register-now.html',{"reg_user":reg_user})
 

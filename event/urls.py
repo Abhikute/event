@@ -30,6 +30,7 @@ urlpatterns = [
     path('events/', views.events, name ='events'), 
     path('services/', views.services, name ='services'), 
     path('contact/', views.contact, name ='contact'), 
+    
     # path(r'^login/$', view.login),
      path('event_details/', views.event_details, name ='event_details'),
     path('success', views.success, name ='success'),
@@ -37,7 +38,7 @@ urlpatterns = [
     path('', include('event_reg.urls')),
     path(r'accounts/', include('django.contrib.auth.urls')),
     path(r'^payment/', views.payment, name='payment'),
-    re_path(r'^response/(?P<user_id>\w+)/$', views.response, name='response'),
+    re_path(r'^response/(?P<user_id>\w+)/(?P<id>\d+)/$', views.response, name='response'),
   
 
     

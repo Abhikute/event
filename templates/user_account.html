@@ -32,6 +32,8 @@
     <th>Images</th>
     <th>Total Videos Uploaded</th>
      <th>videos</th>
+    
+     <th>Paid amount</th>
     <th>upload files</th>
 
 
@@ -49,19 +51,18 @@
     <td>{{reg.register_user.event_sub_category}}</td>
     <td>{{reg.image_count}}</td>
     <td>{%for image in reg.image%}
-       <iframe width="200" height="200"
-src="/media/{{image.image}}">
-</iframe>
-
+      <img src="/media/{{image.image}}" width="220" height="140" border="5" controls>
+   
     {%endfor%}
   </td>
     <td>{{reg.video_count}} </td>
      <td>{%for video in reg.video%}
-      <iframe width="200" height="200"
-src="/media/{{video.video}}">
-</iframe>
+      <video width="220" height="140" controls>
+        <source src="/media/{{video.video}}" type="video/mp4">
+      </video>
     {%endfor%}</td>
     
+    <td>{{reg.amount.TXNAMOUNT__sum }}</td>
     <td><a href="{% url 'FileUpload' pk=reg.register_user.event.pk  id=reg.register_user.id %}">Upload Files</a></td>
   </tr>
 

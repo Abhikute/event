@@ -1,48 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
 {% extends 'master.html' %}
+{% block content %}
+  
+    <div id="owl-slider1" class="owl-carousel">
+        {%for event in event%}
+        <div class="item"><img src="/media/{{event.event_photo}}" alt="The Last of us">
+                          <div class="slide-caption">
+                              <p class="heading">
+                                  {{event.event_name}}
+                              </p>
+                              <!-- <p class="subheading">
+                                 Location :{{event.event_location}}
 
-{% load static %}
-{% block content %}   
-    <section id="innerpage">
-        <div class="container wow fadeInUp">
-            <div class="section-header">
-                <h2>Payment Successful</h2>
-
-
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Payment Response</li>
-                </ul>
-            </div>
+                              </p> -->
+                              <div> <a class="btn btn-info add-event-btn" tabindex="0" href="{% url 'register_with_pk' pk=event.pk %}"> REGISTER NOW</a>    </div>
+                          </div>
+        
         </div>
-    </section>
-    <main id="main">
-        <div class="container">
-            <section class="wow fadeInUp">
-                <div class="border-box">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3">
+      
+       {%endfor%}
+    </div>
 
-                            <div class=" m-0 wow fadeInUp">
-                                <img src="https://icon-library.net/images/icon-checkmark/icon-checkmark-12.jpg" alt="about us image" class="img-fluid" />
+    
+    <main id="main">
+        <section class="services-section">
+            <div class="section-header">
+                <h2>
+                    Services
+                </h2>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox">
+                            <div class="service-icon">
+                                <i class="fa  fa-film"></i>
                             </div>
+                            <h3 class="title">Movies</h3>
+                            <p class="description">
+                                We are keen and focused on creating and developing original stories that shed light on the developmental and ethical issues of our society. 
+                            </p>
+                            <a class="read-more" href="/services/"><i class="fa fa-arrow-right"></i></a>
                         </div>
-                        <div class="col-lg-9 col-md-9">
-                            <h2 style="color: red">Thank you for your payment !</h2>
-                          
-								                                
-								{% for key,value in paytm.items %}
-								  <p style="color: white" class="m-0">
-								    {{key}} :  {{value}} <hr>
-								     </p>
-								{% endfor %}
-                           
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox red">
+                            <div class="service-icon">
+                                <i class="fa fa-video-camera"></i>
+                            </div>
+                            <h3 class="title">Casting</h3>
+                            <p class="description">
+                                Our casting experts and the team find the inner talent within the artists and find a role or a platform that will do justice to their talent. 
+                            </p>
+                            <a class="read-more" href="/services/"><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox green">
+                            <div class="service-icon">
+                                <i class="fa fa-globe"></i>
+                            </div>
+                            <h3 class="title"> Web Series</h3>
+                            <p class="description">
+                                We aim at creating quality web series based on the original stories that not only grab hold of the audience but also give them something to think about.
+                            </p>
+                            <a class="read-more" href="/services/"><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox purple">
+                            <div class="service-icon">
+                                <i class="fa fa-music"></i>
+                            </div>
+                            <h3 class="title">Music Album</h3>
+                            <p class="description">
+                                Music is beyond the medium of entertainment. Music-powerful enough-stirs the listeners’ soul and makes us feel all sorts of emotions from the first beat. 
+                            </p>
+                            <a class="read-more" href="/services/"><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
-            </section>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox blue">
+                            <div class="service-icon">
+                                <i class="fa fa-music"></i>
+                            </div>
+                            <h3 class="title">Music Concerts</h3>
+                            <p class="description">
+                                Listening to music is a great way to deal with the stress, and we all agree to this. While the music is a stress-buster. 
+                            </p>
+                            <a class="read-more" href="/services/"><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox yellow">
+                            <div class="service-icon">
+                                <i class="fa fa-file-video-o"></i>
+                            </div>
+                            <h3 class="title">Short Film Festivals</h3>
+                            <p class="description">
+                                We conduct several short film festivals to provide the platform to the young aspirers and find the emerging talent.
+                            </p>
+                            <a class="read-more" href="/services/"><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox pink">
+                            <div class="service-icon">
+                                <i class="fa fa-play"></i>
+                            </div>
+                            <h3 class="title"> Online Competition</h3>
+                            <p class="description">
+                               We organize online competitions and screenings for writers, editors, actors, and other artists. 
+                            </p>
+                            <a class="read-more" href="/services/"><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section> 
+        <section id="events" class=" bg-white ptb-30 ">
+            <div class="section-header  ptb-30">
+                <h2>
+                    Upcoming Events
+                </h2>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div id="owl-carousel" class=" owl-carousel owl-theme">
+                        {%for event in event %}
+                        <div class="card" >
+                            <img class="card-img-top" src="/media/{{event.event_photo}}" alt="Card image" />
 
-            
-        </div>
-       
+                            <div class="card-body">
+                                <h4 class="card-title" id="title"><a href="{% url 'event_details_with_pk' pk=event.pk %}">{{event.event_name}}</a></h4>
+
+                                <p class="card-text address"><i class="fa fa-map-marker"></i> {{event.event_location}}</p>
+
+                                <p class="card-text address"><i class="fa fa-calendar-o"></i> {{event.event_start_date}} - {{event.event_end_date}} </p>
+                                <p class="m-0"><a href="{% url 'event_details_with_pk' pk=event.pk %}" class="btn btn-xs btn-orange">View Details</a><a class="btn btn-xs btn-orange pull-right" tabindex="0" href="{% url 'register_with_pk' pk=event.pk %}"> Register Now</a></p>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+
+                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-    {%endblock%}
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+    var message='{{message}}'
+    var title_message='{{title_message}}'
+    swal({ title: title_message,
+ text: message,
+  icon: "success",
+ type: "success"}).then(okay => {
+   if (okay) {
+    window.location.href = "/";
+    console.log('The Ok Button was clicked.');
+  }
+
+});
+
+</script>
+
+{% endblock %}
+    <!--==========================
+      Footer
+    ============================-->
+
+
+
+
+
+
+
+
+
+

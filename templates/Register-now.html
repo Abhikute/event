@@ -685,7 +685,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                                                     <div class="col-lg-4 col-md-4">
                                                         <label>  Event Sub-Category</label>
                                                         <div class="form-group"> 
-                                                            <select class="select form-control" value="{{reg_user.event_sub_category}}" name="event_sub_category" onclick="menu()"id="event_sub_category" size="1" required>
+                                                            <select class="select form-control"  name="event_sub_category" id="event_sub_category" required>
                                                                 <option value="" disabled selected>Choose event Sub-category</option>
                                                                 <option></option>
 
@@ -1026,27 +1026,22 @@ Motion Pictures determination is contrary to these terms and conditions or by it
 
 
         }
+
+       var value= '{{event.event_category}}';
+       document.getElementById("event_category").innerHTML = menu(value);
         function menu() {
             
-            var value= '{{event.event_category}}';
+            
             if (value.length == 0) document.getElementById("event_sub_category").innerHTML = "<option></option>";
             else {
                 var citiesOptions = "";
                 for (cityId in ev_sub_category[value]) {
-                    citiesOptions += "<option>" + ev_sub_category[value][cityId] + "</option>";
+                    citiesOptions += "<option>" +ev_sub_category[value][cityId]+ "</option>";
                 }
                 document.getElementById("event_sub_category").innerHTML = citiesOptions;
             }
         }
-        function displaySelected() {
-            var country = document.getElementById("event_category").value;
-            var city = document.getElementById("event_sub_category").value;
-            alert(country + "\n" + city);
-        }
-        function resetSelection() {
-            document.getElementById("event_category").selectedIndex = 0;
-            document.getElementById("event_sub_category").selectedIndex = 0;
-        }
+     
     </script>
 
 
@@ -1099,15 +1094,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                 document.getElementById("citySelect").innerHTML = citiesOptions;
             }
         }
-        function displaySelected() {
-            var country = document.getElementById("countrySelect").value;
-            var city = document.getElementById("citySelect").value;
-            alert(country + "\n" + city);
-        }
-        function resetSelection() {
-            document.getElementById("countrySelect").selectedIndex = 0;
-            document.getElementById("citySelect").selectedIndex = 0;
-        }
+      
     </script>
 
     <!-- <script type="text/javascript">

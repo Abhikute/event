@@ -455,7 +455,7 @@ label {
 }
 
 #upload_prev .dele, #upload_prev .dele:hover {
-    margin-left: 10px;
+        margin-left: 10px;
     margin-bottom: 0;
     color: #ccc;
     padding: 2px 5px 5px 5px;
