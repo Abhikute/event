@@ -25,11 +25,13 @@
                         
                         <div class="col-lg-9 col-md-9">
                             <h2>Login</h2>
-							<form method="post">
+							<form method="post" class="form-group">
 									  {% csrf_token %}
 									  {{ form.as_p   }}
-                                      <button type="submit">Login</button><br>
-									  <a href="/password_reset/">Forget password?</a> / <a  href="{% url 'register_user' %}"  >Sign-Up</a> 
+                                        <a href="/password_reset/" class="btn btn-secondary btn-sm" role="button">Forgot Password?</a>
+                                        <a href="{% url 'register_user' %}" class="btn btn-secondary btn-sm" role="button">Sign-Up</a>
+                                        <button type="submit" class="btn btn-primary btn-sm">Login</button>
+                                    
 								</form>                  </div>
                     </div>
                 </div>

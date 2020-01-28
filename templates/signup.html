@@ -30,7 +30,7 @@
               <div  id="signin" role="tabpanel" aria-labelledby="signin">
                                
                                     
-                                       <form method="post" >
+                                       <form method="post" class="form-group" >
                                         {% csrf_token %}
                                           {{forms.as_p}}
                                                  
@@ -49,7 +49,7 @@
                                                
 
                                         {% endfor %}
-                                        <button type="submit">Sign up</button>
+                                        <button type="submit" class="btn btn-info">Sign-Up</button>
                                       </form>
                                    
                                    

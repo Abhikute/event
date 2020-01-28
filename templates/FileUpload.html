@@ -27,98 +27,86 @@
 
                         </div>
                         <div class="col-lg-12 col-md-12">
-
-
-
-
-                            <div class=" subheading">File Upload Instructions</div>
+                         <div class=" subheading">Important Instructions</div>
 
                        
-                                <div class="instruct brder-bottm ">
-                                    <div class="text-uppercase text-bold mb-2"><i class="fa fa-image"></i> Photo Uploading</div>
-                                    <p>
-                                        Only phtography competitaion particepants are allow to upload images please follow below instrucations to avoid anwanted issues. 
-                                        
-                                       <ul>
-                                        <li>Photos in:- JPEG.</li>
-                                        <li>
-                                            Categories:- All.
-                                        </li>
-                                        <li>
-                                            Photo size: upto 2MB
-                                        </li>
-                                        <li>
-                                            Age:- 15Yrs & Above.
-                                        </li>
-                                        <li>
-                                            Registration Fees:- Rs 1000/- Includes 5 Photo's, afterthat Participant can submit more than
-                                        five photo, upto 50 Photo's. For Rs 500/- Per 3 Photos. ( NON REFUNDABLE ).
-                                        </li>
-                                        <li>
-                                            Entries Deadline:- 1 March 2020.
-                                        </li>
-                                        <li>
-                                            Notification Date:- 20 March 2020.
-                                        </li>
-                                        <li>
-                                            Prize Distribution Ceremony:- 29 March 2020.
-                                        </li>
-
-
-                                    </ul>
-                                </p>
-                                </div>
+                                
                             </div>
 
                             <div class="col-lg-12 col-md-12">
-
-
-
-
-
                                 <div class="instruct">
-                                    <div class="text-uppercase text-bold mb-2"><i class="fa fa-image"></i> Video Uploading</div>
-                                    <p>
-                                    
-                                    Music,Musical instruments,Poetry,Shayari,Tiktok and Singing competition praticipants are allowed to upload videos.
-                                    Please follow below instruction to avoid unwanted issues.
-                                       
-                                    </p>
+                                    <div class="text-uppercase text-bold mb-2"><i class="fa fa-image"></i> File Uploading Instructions</div>
+                                   
                                     <ul>
 
                                         <li>
-                                           Video Length upto:- 4 min (video size should be less than 5MB).
+                                           File Size upto:- {{event.file_size_instruction}}.
                                         </li>
                                         <li>
-                                           Categories:- All.
+                                           Categories:- {{event.file_categories_instruction}}.
                                         </li>
                                         <li>
-                                           Language:- All.
+                                           Language:- ALL.
                                         </li>
                                         <li>
-                                            Age:- 5Yrs & Above (for Singing, Musical instruments and dance competitions),10Yrs & Above (for Poetry and Tiktok competitions) and 18Yrs & Above (for Shayari Competition)
+                                            Age:- {{event.participant_Age_instruction}}
                                         </li>
                                         <li>
-                                            Registration Fees:- Rs 1000/- Includes 1 Video, afterthat Participant can submit more than
-                                        one Video, upto 21 Video's. For Rs 500/- Per Video. ( NON REFUNDABLE ).
+                                            Registration Fees:-{{event.Registration_fees_instruction}}.
+                                        </li>
+                                       
+                                       
+                                        <li>
+                                            Entries Deadline:- {{event.entry_deadline_instruction}}.
                                         </li>
                                         <li>
-                                            Make A Video (Selfie Video accepted) & Upload it.
+                                             Notification Date:- {{event.notification_date_instruction}}.
                                         </li>
                                         <li>
-                                            multiple Video merging is not allowed, only Single type of video can be accepted.
+                                            Prize Distribution Ceremony:- {{event.prize_dist_instruction}}
                                         </li>
                                         <li>
-                                            Entries Deadline:- 1 March 2020.
-                                        </li>
-                                        <li>
-                                             Notification Date:- 20 March 2020.
-                                        </li>
-                                        <li>
-                                            Prize Distribution Ceremony:- 29 March 2020
+                                            Other Instructions:- {{event.other_instruction}}
                                         </li>
                                     </ul>
                                 </div>
+                               
+                               <div class="instruct">
+                                    <div class="text-uppercase text-bold mb-2"><i class="fa fa-gift"></i> Prize Distribution</div>
+                                   
+                                    <ul>
+
+                                        <li>
+                                           File Size upto:- {{event.file_size_instruction}}.
+                                        </li>
+                                        <li>
+                                           Categories:- {{event.file_categories_instruction}}.
+                                        </li>
+                                        <li>
+                                           Language:- ALL.
+                                        </li>
+                                        <li>
+                                            Age:- {{event.participant_Age_instruction}}
+                                        </li>
+                                        <li>
+                                            Registration Fees:-{{event.Registration_fees_instruction}}.
+                                        </li>
+                                       
+                                       
+                                        <li>
+                                            Entries Deadline:- {{event.entry_deadline_instruction}}.
+                                        </li>
+                                        <li>
+                                             Notification Date:- {{event.notification_date_instruction}}.
+                                        </li>
+                                        <li>
+                                            Prize Distribution Ceremony:- {{event.prize_dist_instruction}}
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+
                             </div>
                         </div>
                 </div>
@@ -132,21 +120,18 @@
                             
                             <div class="col-lg-12 col-md-12 ">
                                 <div class="white-bg">
-                                  <table style="width:100%">
+                                  <table class="table">
                                     <caption>Upload Files</caption>
                                     
                                     <tr>
                                       <th>Event Name</th>
-                                      <th>{{event.event_name}}</th>
+                                     <th>Event Category </th>
                                     </tr>
                                     <tr>
-                                      <td>Event Category</td>
+                                      <td>{{event.event_name}}</td>
                                       <td id="event_category" name="event_category" >{{event.event_category}}</td>
                                     </tr>
-                                    <tr>
-                                      <td>Event Sub-Catagory</td>
-                                      <td>ggg</td>
-                                    </tr>
+                                   
                                   </table>
                                   <input type="hidden" id="event_id" name="event_id" value="{{event_id.pk}}">
                                     <input type="hidden" id="event_pk" name="event_pk" value="{{event_id.event.pk}}">
@@ -154,7 +139,7 @@
 
 
                                                   
-
+                                                     
 
                                                   
                                                         <div class="row" id="photo">
@@ -231,7 +216,7 @@
                                                         </div>
                                                     </div>
                                               
-
+                                                   
                                                    <div class="col-lg-12 text-center">
                                                         
                                                         <input type="submit" class="btn btn-primary" value="CheckOut" />
@@ -334,10 +319,9 @@
             for (var i = 0; i < files.length; i++) {
                 $("#upload_prev").append('<span>' + '<div class="filenameupload"> <tr><td>'+ files[i].name  +'</td>             <td>'+files[i].size*0.000001+'Mb</td></tr></table></div>' + '<span class="dele" ><i class="fa fa-times"></i></span></span>');
             }
-            console.log(files)
+           
             fileCount += files.length;
-            files[0].value=''
-             console.log(files)
+            
             showFileCount();
 
         });
@@ -382,12 +366,12 @@
             // var filessee= $("#uploadFilea").val();
             // $("#uploadFilea").each(function(){
             //    console.log(this);
-            //   //  var filess = $(this.files);
-            //   // $(filess).each(function(index){
-            //   //   if(fileName == filess[index].name){
+            //    var filess = $(this.files);
+            //   $(filess).each(function(index){
+            //     if(fileName == filess[index].name){
                   
                  
-            //   // }
+            //   }
              
             // })           
            

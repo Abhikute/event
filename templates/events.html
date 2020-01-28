@@ -106,12 +106,14 @@
 
 
                                 <ul>
-                                    <li><a href="#"> Pune <small class="pull-right">25</small></a>   </li>
-                                    <li><a href="#"> Mumbai <small class="pull-right">05</small></a>     </li>
+                                    {%for location in locations %}
+                                    <li><a href="{% url 'events_with_city' city=location.event_location %}"> {{location.event_location}} <small class="pull-right">{{location.loc_count}}</small></a>   </li>
+                                    <!-- <li><a href="#"> Mumbai <small class="pull-right">05</small></a>     </li>
                                     <li><a href="#"> Nashik <small class="pull-right">20</small></a>     </li>
                                     <li><a href="#"> Nagpur <small class="pull-right">02</small></a>   </li>
                                     <li><a href="#"> Kolhapur <small class="pull-right">50</small></a>     </li>
-                                    <li><a href="#"> Satara <small class="pull-right">02</small></a>     </li>
+                                    <li><a href="#"> Satara <small class="pull-right">02</small></a>     </li> -->
+                                    {%endfor%}
                                 </ul>
 
                             </div>
@@ -127,14 +129,12 @@
                             </div>
                             <div class="city-sidebar">
                                 <ul>
+                                     {%for cat in categorys %}
                                     <li>
-                                        <a href="#">
-                                            Movies
-
-                                            <small class="pull-right">12</small>
-                                        </a>
+                                        <a href="{% url 'events_with_category' category=cat.event_category %}"> {{cat.event_category}}<small class="pull-right">{{cat.cat_count}}</small></a>
                                     </li>
-                                    <li>
+                                    {%endfor%}
+                                    <!-- <li>
                                         <a href="#">
                                             Casting
 
@@ -170,7 +170,7 @@
 
                                             Online Competition <small class="pull-right">15</small>
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>

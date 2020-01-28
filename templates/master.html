@@ -8,8 +8,7 @@
     <meta charset="utf-8">
     <title>Events</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+   
     <!-- Favicons -->
     <link href="{% static 'event_reg/img/favicon.png' %}" rel="icon">
     <link href="{% static 'event_reg/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
@@ -26,7 +25,7 @@
     <link href="{% static 'event_reg/lib/owlcarousel/assets/owl.theme.default.css' %}"  rel="stylesheet"/>
     <link href="{% static 'event_reg/lib/owlcarousel/assets/owl.carousel.css' %}" rel="stylesheet"/>
 
-
+  
 
     <style type="text/css">
     	
@@ -68,14 +67,15 @@
                     <li><a href="{% url 'services' %}">Services</a></li>
                     <li><a href="{% url 'events' %}">Events</a></li>
                     <li><a href="{% url 'contact' %}">Contact</a></li>
+
                     <!-- <li><a class="" href="#" data-toggle="modal" data-target="#login-signin">Login / Register</a></li>-->
                     <li class="nav-item dropdown">
                         <a  data-toggle="dropdown"  href="#" class="nav-link dropdown-toggle" href="/admin/" >{{user}}</a>
 
 					<ul class="dropdown-menu">
-    					<li><a  href="{% url 'user_account' %}" >My Account</a></li>
+    					<li><a style="color: black" href="{% url 'user_account' %}" >My Account</a></li>
                      
-                     <li><a  href="/accounts/logout/" >Logout</a></li>
+                     <li><a style="color: black"  href="/accounts/logout/" >Logout</a></li>
 					</ul>
 
 

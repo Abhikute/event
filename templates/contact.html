@@ -60,7 +60,13 @@
                     </div>
 
 
-                </div>
+                </div> 
+               <!--  <div id="bsalert" aria-hidden="true" class="alert alert-success  fade show" >
+                                <strong>Hi {{user}},</strong> Your message has been sent. Thank you!
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                                </div> -->
                 <div class="row">
                     <div class="col-lg-7 col-md-7">
                         <div class="wow fadeInUp border-box venue">
@@ -83,9 +89,11 @@
 
                     <div class="col-lg-5 col-md-5">
                         <div class="form border-box">
-                            <div id="sendmessage">Your message has been sent. Thank you!</div>
+                            <div id="sendmessage"></div>
+                            
                             <div id="errormessage"></div>
                             <form action="" method="post" role="form" class="contactForm">
+                                 {% csrf_token %}
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
@@ -104,7 +112,7 @@
                                     <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
                                     <div class="validation"></div>
                                 </div>
-                                <div class="text-center"><button type="submit">Send Message</button></div>
+                                <div class="text-center"><button type="submit" id="btn">Send Message</button></div>
                             </form>
                         </div>
 
@@ -115,6 +123,16 @@
 
             </div>
         </section><!-- #contact -->
+        <script type="text/javascript">
+         function toggleAlert(){
+    $(".alert").toggleClass('in out'); 
+    return false; // Keep close.bs.alert event from removing from DOM
+}
+
+
+$("#btn").on("click", toggleAlert);
+$('#bsalert').on('close.bs.alert', toggleAlert)
+        </script>
 
     </main>
     <!--==========================

@@ -22,18 +22,15 @@
                 <div class="row">
 
                
-                    <table>
+                    <table class="table table-dark table-striped">
   <tr>
      <th>Registratrion ID</th>
     <th>Register for Event</th>
     <th>Category</th>
     <th>Sub-Category</th>
-    <th>Total Images uploaded</th>
-    <th>Images</th>
-    <th>Total Videos Uploaded</th>
-     <th>videos</th>
-    
-     <th>Paid amount</th>
+    <th>Images uploaded</th>
+    <th>Videos Uploaded</th>
+    <th>Paid amount</th>
     <th>upload files</th>
 
 
@@ -49,21 +46,33 @@
     <td>{{reg.register_user.event.event_name}}</td>
     <td>{{reg.register_user.event.event_category}}</td>
     <td>{{reg.register_user.event_sub_category}}</td>
-    <td>{{reg.image_count}}</td>
-    <td>{%for image in reg.image%}
-      <img src="/media/{{image.image}}" width="220" height="140" border="5" controls>
+   <td>
+       <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#demo_img_{{reg.register_user.id}}">{{reg.image_count}}</button>
+      <div id="demo_img_{{reg.register_user.id}}" class="collapse">
+      {%for image in reg.image%}
+      <img src="/media/{{image.image}}" class="img-thumbnail" alt="Cinque Terre" width="100" height="100" border="2" controls>
    
     {%endfor%}
+  </div>
   </td>
-    <td>{{reg.video_count}} </td>
-     <td>{%for video in reg.video%}
-      <video width="220" height="140" controls>
+    
+     <td>
+      <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#demo_{{reg.register_user.id}}">{{reg.video_count}}</button>
+  <div id="demo_{{reg.register_user.id}}" class="collapse">
+     {%for video in reg.video%}
+     <video width="220" height="140" controls>
         <source src="/media/{{video.video}}" type="video/mp4">
       </video>
-    {%endfor%}</td>
+       {%endfor%}
+  </div>
+     
+
+     
+   </td>
     
     <td>{{reg.amount.TXNAMOUNT__sum }}</td>
-    <td><a href="{% url 'FileUpload' pk=reg.register_user.event.pk  id=reg.register_user.id %}">Upload Files</a></td>
+     <td> <a href="{% url 'FileUpload' pk=reg.register_user.event.pk  id=reg.register_user.id %}" class="btn btn-info" role="button">Upload Files</a></td>
+    <!-- td><a href="{% url 'FileUpload' pk=reg.register_user.event.pk  id=reg.register_user.id %}">Upload Files</a></td> -->
   </tr>
 
  

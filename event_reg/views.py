@@ -20,7 +20,8 @@ from . import Checksum
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 import requests
-file_dict={}
+from django.db.models import Count
+
 @login_required
 def home(request):
 	even=event.objects.all()
@@ -75,15 +76,11 @@ def user_account(request):
 	return render(request,'user_account.html',{'registration_details':user_registration_details})
 
 
-def events(request):
-	all_events=event.objects.all()
-	locations=[]
-	categorys=[]
-	for item in all_events:
-		if item.event_location not in locations or item.event_category not in categorys:
-			locations.append(item.event_location)
-			categorys.append(item.event_category)
-
+def events(request,city=None,category=None):
+	
+	locations=event.objects.values('event_location').annotate(loc_count=Count('event_location'))
+	categorys=event.objects.values('event_category').annotate(cat_count=Count('event_category'))
+		
 	if request.method=='POST':
 		location=request.POST.get('city')
 		category=request.POST.get('category')
@@ -92,14 +89,22 @@ def events(request):
 			even=event.objects.all()
 			return render(request,'events.html',{"event":even,"locations":locations,"categorys":categorys})
 
-			
-		else:
-			print (location)
+		elif (location=="Select City" and category!="Select Category") or (location!="Select City" and category=="Select Category") :
 			even=event.objects.filter(Q(event_location=str(location)) | Q(event_category=str(category)))
+			return render(request,'events.html',{"event":even,"locations":locations,"categorys":categorys})
+		else:
+			
+			even=event.objects.filter(Q(event_location=str(location)) , Q(event_category=str(category)))
 			return render(request,'events.html',{"event":even,"locations":locations,"categorys":categorys})
 			
 
-	even=event.objects.all()
+	if city or category:
+		print (city, category)
+		even=event.objects.filter(Q(event_location=city) |  Q(event_category=city))
+	else:
+		even=event.objects.all()
+	
+	
 	
 	return render(request,'events.html',{"event":even,"locations":locations,"categorys":categorys})
 
@@ -263,7 +268,7 @@ def response(request, user_id,id):
 					
 					send_mail(email_subject, message,'info@vyomamotionpictures.com',[to_email])
 					message="Transaction ID:"+data_dict['TXNID']+"Order ID:"+data_dict['ORDERID']
-					title_message="Event Registration Completed"
+					title_message="Files Uploaded Successfully"
 					return render(request,"response.html", {"event": event.objects.all(),"title_message":title_message,"message":message})
 					
 				elif data_dict['STATUS']=='TXN_FAILURE':
@@ -297,7 +302,7 @@ def FileUpload(request,pk=None,id=None):
 		# response=requests.post(url,  data = json.dumps(myobj),headers=headers)
 		# response = requests.post(url, data = post_data, headers = {"Content-type": "application/json"}).json()
 
-		print ("###############################",billing_amount)
+		
 		if pk==None or id==None:
 			id=request.POST.get('event_id')
 			pk=request.POST.get('event_pk')
