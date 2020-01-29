@@ -1,25 +1,21 @@
 from django.shortcuts import render,redirect 
-from .forms import user_geristration_form,SignUpForm
+from .forms import SignUpForm
 from django.http import HttpResponse ,HttpResponseRedirect
 from django.contrib.auth import login, authenticate
-
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
-
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from .models import event,user_reg,PaytmHistory,Images,Videos,Temp_Videos,Temp_Images
-import json
 from django.db.models import Q,Sum
 from django.conf import settings
 from django.utils.decorators import method_decorator
 from . import Checksum
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-import requests
 from django.db.models import Count
 
 @login_required
@@ -85,6 +81,7 @@ def events(request,city=None,category=None):
 		location=request.POST.get('city')
 		category=request.POST.get('category')
 		
+		
 		if location=="Select City" and category=="Select Category":
 			even=event.objects.all()
 			return render(request,'events.html',{"event":even,"locations":locations,"categorys":categorys})
@@ -99,7 +96,7 @@ def events(request,city=None,category=None):
 			
 
 	if city or category:
-		print (city, category)
+		
 		even=event.objects.filter(Q(event_location=city) |  Q(event_category=city))
 	else:
 		even=event.objects.all()
@@ -171,7 +168,6 @@ def activate_account(request, uidb64, token):
 	if user is not None and account_activation_token.check_token(user, token):
 		user.is_active = True
 		user.save()
-		# print (user)
 		note="Your account has been activate successfully"
 		return render(request,'registration/response.html',{"note":note})
 	else:
@@ -218,7 +214,7 @@ def payment(request,bill_amount=None,user_reg=None):
 @csrf_exempt
 def response(request, user_id,id):
 	if request.method == "POST":
-		# try:
+		try:
 			
 			event_id=user_reg.objects.get(pk=id).event.pk
 			print(event_id)
@@ -278,12 +274,12 @@ def response(request, user_id,id):
 				
 				
 
-		# except:
-		# 	return HttpResponse("response return")
+		except:
+			return HttpResponse("response return")
 
 
-		# else:
-		# 	return HttpResponse("checksum verify failed")
+		else:
+			return HttpResponse("checksum verify failed")
 	else:
 		return HttpResponse("Method \"GET\" not allowed")
 
@@ -295,13 +291,6 @@ def FileUpload(request,pk=None,id=None):
 		pk=pk
 		
 		billing_amount=request.POST.get('data')
-		# url = 'https://securegw-stage.paytm.in/theia/processTransaction'
-		# myobj = payment(request,billing_amount,id)
-		# print (myobj)
-		# headers = {'content-type': 'application/json'} 
-		# response=requests.post(url,  data = json.dumps(myobj),headers=headers)
-		# response = requests.post(url, data = post_data, headers = {"Content-type": "application/json"}).json()
-
 		
 		if pk==None or id==None:
 			id=request.POST.get('event_id')
@@ -317,7 +306,7 @@ def FileUpload(request,pk=None,id=None):
 
 				
 						for fileimg in request.FILES.getlist(key):
-							# file_dict[id]=fileimg
+							
 							Image_file=Images(user_reg=user_reg.objects.get(pk=id),event=event.objects.get(pk=pk),image=fileimg)
 							Image_file.save()
 
@@ -327,7 +316,7 @@ def FileUpload(request,pk=None,id=None):
 					if request.FILES[key]:
 							
 						for fileimg in request.FILES.getlist(key):
-							# file_dict[id]=fileimg
+							
 							
 							Video_file=Videos(user_reg=user_reg.objects.get(pk=id),event=event.objects.get(pk=pk),video=fileimg)
 							Video_file.save()
@@ -344,7 +333,7 @@ def FileUpload(request,pk=None,id=None):
 
 				
 					for fileimg in request.FILES.getlist(key):
-						# file_dict[id]=fileimg
+						
 						image=Temp_Images(user_reg_id=id,image=fileimg)
 						image.save()
 
@@ -354,7 +343,7 @@ def FileUpload(request,pk=None,id=None):
 				if request.FILES[key]:
 							
 					for fileimg in request.FILES.getlist(key):
-						# file_dict[id]=fileimg
+						
 						
 						video=Temp_Videos(user_reg_id=id,video=fileimg)
 						video.save()
@@ -399,7 +388,7 @@ def register(request,pk=None):
 
 		
 		registration_form.pop("csrfmiddlewaretoken", None)
-		# registration_form.pop("event_name", None)
+		
 		registration_form.pop("event_category", None)
 		registration_form.pop("FileUpload", None)
 		registration_form.pop("username",None)

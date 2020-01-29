@@ -4,8 +4,10 @@
 {% block content %}
 
 <div id="pageloader">
-   <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
-   <span style="width:72%"></span>
+  <button class="btn btn-primary" type="button" disabled>
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  <span class="sr-only">Loading...</span>
+</button>
 </div>
 
     
@@ -26,14 +28,85 @@
                             <p></p>
 
                         </div>
-                        <div class="col-lg-12 col-md-12">
-                         <div class=" subheading">Important Instructions</div>
+                        <div class="col-lg-12 col-md-12 side-img-content">
+                           <!--  <button  style="margin-left:26%" class="btn btn-secondary" data-toggle="collapse" data-target="#dem">Important Instructions</button> -->
+                            <p  class="d-lg-none" data-toggle="collapse" data-target="#dem"><u>Important Instructions</u></p>
+                           
 
-                       
+                        </div>
+                               
+                              
+                         
+                         <div id="dem" class="collapse">
+
+                          <div class="col-lg-12 col-md-12">
+                    
+
+                          
+                            
+
+                            <div class="instruct">
+                                    <div class="text-uppercase text-bold mb-2"><i class="fa fa-image"></i> File Uploading Instructions</div>
+                                   
+                                    <ul>
+
+                                        <li>
+                                           File Size upto:- {{event.file_size_instruction}}.
+                                        </li>
+                                        <li>
+                                           Categories:- {{event.file_categories_instruction}}.
+                                        </li>
+                                        <li>
+                                           Language:- ALL.
+                                        </li>
+                                        <li>
+                                            Age:- {{event.participant_Age_instruction}}
+                                        </li>
+                                        <li>
+                                            Registration Fees:-{{event.Registration_fees_instruction}}.
+                                        </li>
+                                       
+                                       
+                                        <li>
+                                            Entries Deadline:- {{event.entry_deadline_instruction}}.
+                                        </li>
+                                        <li>
+                                             Notification Date:- {{event.notification_date_instruction}}.
+                                        </li>
+                                        <li>
+                                            Prize Distribution Ceremony:- {{event.prize_dist_instruction}}
+                                        </li>
+                                        <li>
+                                            {{event.other_instruction1}}
+                                        </li>
+                                        <li>
+                                            {{event.other_instruction2}}
+                                        </li>
+                                        <li>
+                                             {{event.other_instruction3}}
+                                        </li>
+                                        <li>
+                                           {{event.other_instruction4}}
+                                        </li>
+                                        <li>
+                                             {{event.other_instruction5}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            
                                 
                             </div>
 
-                            <div class="col-lg-12 col-md-12">
+                         </div>
+     
+    
+                        <div class="col-lg-12 col-md-12">
+                    
+
+                          
+                            <div class="d-none d-lg-block">
+
+                            <div class="brder-bottm ">
                                 <div class="instruct">
                                     <div class="text-uppercase text-bold mb-2"><i class="fa fa-image"></i> File Uploading Instructions</div>
                                    
@@ -66,48 +139,28 @@
                                             Prize Distribution Ceremony:- {{event.prize_dist_instruction}}
                                         </li>
                                         <li>
-                                            Other Instructions:- {{event.other_instruction}}
+                                            {{event.other_instruction1}}
+                                        </li>
+                                        <li>
+                                            {{event.other_instruction2}}
+                                        </li>
+                                        <li>
+                                             {{event.other_instruction3}}
+                                        </li>
+                                        <li>
+                                           {{event.other_instruction4}}
+                                        </li>
+                                        <li>
+                                             {{event.other_instruction5}}
                                         </li>
                                     </ul>
                                 </div>
-                               
-                               <div class="instruct">
-                                    <div class="text-uppercase text-bold mb-2"><i class="fa fa-gift"></i> Prize Distribution</div>
-                                   
-                                    <ul>
-
-                                        <li>
-                                           File Size upto:- {{event.file_size_instruction}}.
-                                        </li>
-                                        <li>
-                                           Categories:- {{event.file_categories_instruction}}.
-                                        </li>
-                                        <li>
-                                           Language:- ALL.
-                                        </li>
-                                        <li>
-                                            Age:- {{event.participant_Age_instruction}}
-                                        </li>
-                                        <li>
-                                            Registration Fees:-{{event.Registration_fees_instruction}}.
-                                        </li>
-                                       
-                                       
-                                        <li>
-                                            Entries Deadline:- {{event.entry_deadline_instruction}}.
-                                        </li>
-                                        <li>
-                                             Notification Date:- {{event.notification_date_instruction}}.
-                                        </li>
-                                        <li>
-                                            Prize Distribution Ceremony:- {{event.prize_dist_instruction}}
-                                        </li>
-
-                                    </ul>
-                                </div>
-
-
                             </div>
+                            </div>
+                                
+                            </div>
+
+                           
                         </div>
                 </div>
                 <aside class="col-sm-12 col-lg-8 col-md-8 pl0  content-form">
@@ -115,7 +168,7 @@
 
                 <form method="POST" enctype="multipart/form-data"  action="">
                   {% csrf_token %} 
-                    <div class="border-box p30">
+                   
                         <div class="row">
                             
                             <div class="col-lg-12 col-md-12 ">
@@ -228,7 +281,7 @@
                                 </div>
                             </div>
                    
-                        </div>
+                      
                  
                  </form>
             <!--       <button onclick="myFunction()">Click me</button> -->
@@ -398,41 +451,7 @@
 
 </script> 
 
-  <script type="text/javascript">
-        var ev_sub_category = {
-
-            Dance: ['Bhratnatyam', 'Kathak', 'Manipuri', 'Kuchipuri', 'Odissi', 'Bhangra/Gidda', 'Garba', 'Rouf', 'Ghoomar', 'Chhau', 'Bihu', 'Lavani', 'Mohiniyattam', 'Sattriya Dance', 'Waltz', 'Tango', 'Cha-Cha-Cha', 'Rumba', 'Samba', 'Mambo', 'Quickstep', 'Jive', 'Bolero', 'Charleston', 'Other'],
-            Poetry: ['Sonnet', 'Elegy', 'Haiku', 'Limerick', 'Epic', 'Acrostic', 'Ode', 'Ballad', 'Epigram', 'Concrete', 'Other'],
-            Shayari: ['Love', 'Funny', 'Sad', 'Romantic', 'Dosti', 'Urdu', 'Aansu', 'Bewafa', 'Birthday', 'Dard', 'Dard-e-dil', 'Diwali', 'Dua', 'Gham', 'Intezaar', 'Ishq', 'Judai', 'Khawab', 'Mohobbat', 'Naseeb', 'Patriotic', 'Prem', 'Pyaar', 'Sharabi', 'Tanhai', 'Arman', 'Udasi', 'Attitude', 'Kash', 'Khoobsurat', 'Khyal', 'Jindagi', 'Tareef', 'Mausam', 'Yaad', 'Shubh prabhat', 'Shubh ratri', 'Shikva', 'Hindi urdu gazzal', 'Hindi', 'Other'],
-            Photography: ['Landscape', 'Wildlife', 'Aerial', 'Sports/Action', 'Portrait', 'Architectural', 'Wedding/Event', 'Fashion', 'Macro', 'Baby/Family', 'Abstract', 'Beauty', 'Bird', 'Black And White', 'Bodyscape', 'Candid', 'Conceptual', 'Firework', 'Food', 'Forced perspective', 'HDR', 'High speed', 'Infrared', 'Lomo', 'Long exposure', 'Micro', 'Mobile', 'Modeling', 'Nature', 'Night', 'Nude', 'Panoramic', 'Past and present', 'Rain', 'Rainbow', 'Real estate', 'Relection', 'Satellite', 'Still Life', 'Strom', 'Stock,Street', 'Sunrise/sunset', 'Tilt Shift', 'Time lapse', 'Travel', 'Underwater', 'Urban/Industrial', 'Vehicle', 'Vintage', 'Other'],
-            Singing: ['Classical', 'Folk', 'Baul', 'Bhajan', 'Odissi', 'Thumri', 'Dadra', 'Chaiti', 'kajari', 'Sufi', 'Gazal', 'Qawwali', 'Bhangra', 'Blues', 'Filmy', 'Goa', 'Trance', 'Indi-pop', 'Jazz', 'Rock', 'Other'],
-            Tiktok: ['Action', 'Comedy', 'Crime', 'Drama', 'Fantasy', 'Horror', 'Music', 'Musical', 'Romance', 'Sci-Fi', 'Social', 'Thriller', 'War', 'Western', 'Other'],
-
-
-        }
-        function menu() {
-            
-            var value= '{{event.event_category}}';
-            if (value.length == 0) document.getElementById("event_sub_category").innerHTML = "<option></option>";
-            else {
-                var citiesOptions = "";
-                for (cityId in ev_sub_category[value]) {
-                    citiesOptions += "<option>" + ev_sub_category[value][cityId] + "</option>";
-                }
-                document.getElementById("event_sub_category").innerHTML = citiesOptions;
-            }
-        }
-        function displaySelected() {
-            var country = document.getElementById("event_category").value;
-            var city = document.getElementById("event_sub_category").value;
-            alert(country + "\n" + city);
-        }
-        function resetSelection() {
-            document.getElementById("event_category").selectedIndex = 0;
-            document.getElementById("event_sub_category").selectedIndex = 0;
-        }
-    </script>
-
+  
 
     
 
@@ -453,22 +472,7 @@
             // $("#photo").show();
         });
     </script>
-<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script >
-   function myFunction(){ 
-  swal({ title: "Payment gateway",
- text: "Processing for payment",
-  icon: "success",
- type: "success"}).then(okay => {
-   if (okay) {
-    window.location.href = "#";
-    console.log('The Ok Button was clicked.');
-  }
 
-});
-}
-
-</script> -->
 
 <script type="text/javascript">
     $(document).ready(function(){

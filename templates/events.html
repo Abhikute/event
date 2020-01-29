@@ -27,7 +27,7 @@
                                                     <select name="city" class="custom-select   form-control ">
                                                         <option selected>Select City</option>
                                                         {%for city in locations%}
-                                                        <option value="{{city}}">{{city}}</option>
+                                                        <option value="{{city.event_location}}">{{city.event_location}}</option>
                                                         <!-- <option value="New Delhi">New Delhi</option>
                                                         <option value="Pune">Pune</option>
                                                         <option value="Mumbai">Mumbai</option> -->
@@ -44,7 +44,7 @@
 
                                                     <option value="Select Category">Select Category</option>
                                                     {%for category in categorys%}
-                                                    <option value="{{category}}">{{category}}</option>
+                                                    <option value="{{category.event_category}}">{{category.event_category}}</option>
                                                   <!--   <option>Dance</option>
                                                     <option>Music</option>
                                                     <option>Casting</option>

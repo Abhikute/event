@@ -6,9 +6,11 @@
     <head>
     	<style type="text/css"></style>
     <meta charset="utf-8">
-    <title>Events</title>
+    <title>Vyoma Motion Pictures</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-   
+   <link rel="icon" 
+     type="image/png" 
+     href="{% static 'event_reg/img/logo.png' %}">
     <!-- Favicons -->
     <link href="{% static 'event_reg/img/favicon.png' %}" rel="icon">
     <link href="{% static 'event_reg/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
@@ -56,13 +58,15 @@
 
             <div id="logo" class="pull-left">
 
-                <a href="{% url 'index' %}" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title=""></a>
+                <a href="{% url 'index' %}" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title="titile"></a>
+                <div class="d-inline-block mr-1">VYOMA<span> Motion Pictures Pvt. Ltd.</span></div>
+
             </div>
             
 			{% if user.is_authenticated %}
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li class="menu-active"><a href="{% url 'index' %}">Home</a></li>
+                    <li ><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'about_us' %}">About</a></li>
                     <li><a href="{% url 'services' %}">Services</a></li>
                     <li><a href="{% url 'events' %}">Events</a></li>
