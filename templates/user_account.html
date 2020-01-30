@@ -7,7 +7,7 @@
     <section id="innerpage">
         <div class="container wow fadeInUp">
             <div class="section-header">
-                <h2>{{user.first_name}},Registration</h2>
+                <h2>Registration Detail</h2>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">User account</li>
@@ -22,16 +22,16 @@
                 <div class="row">
 
                
-                    <table class="table table-dark table-striped">
+                    <table class="table table-dark table-striped table-responsive-lg">
   <tr>
-     <th>Registratrion ID</th>
-    <th>Register for Event</th>
+     <th>Registratrion Id</th>
+    <th>Event Name</th>
     <th>Category</th>
-    <th>Sub-Category</th>
-    <th>Images uploaded</th>
+    <th>Sub Category</th>
+    <th>Images Uploaded</th>
     <th>Videos Uploaded</th>
-    <th>Paid amount</th>
-    <th>upload files</th>
+    <th>Paid Amount</th>
+    <th>Upload Files</th>
 
 
   </tr>
@@ -70,7 +70,7 @@
      
    </td>
     
-    <td>{{reg.amount.TXNAMOUNT__sum }}</td>
+    <td><i class="fa fa-rupee"></i> {{reg.amount.TXNAMOUNT__sum }}</td>
      <td> <a href="{% url 'FileUpload' pk=reg.register_user.event.pk  id=reg.register_user.id %}" class="btn btn-info" role="button">Upload Files</a></td>
     <!-- td><a href="{% url 'FileUpload' pk=reg.register_user.event.pk  id=reg.register_user.id %}">Upload Files</a></td> -->
   </tr>

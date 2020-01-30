@@ -2,11 +2,69 @@
 
 {% load static %}
 {% block content %}
+<style type="text/css">
+  .spinner {
+  margin: 100px auto;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 10px;
+}
 
-<div id="pageloader">
-   <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
-   <span style="width:72%"></span>
+.spinner > div {
+  background-color: #333;
+  height: 10%;
+  width: 6px;
+  display: inline-block;
+  
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% { 
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+</style>
+
+<div class="spinner" id="pageloader">
+  <div class="rect1"></div>
+  <div class="rect2"></div>
+  <div class="rect3"></div>
+  <div class="rect4"></div>
+  <div class="rect5"></div>
 </div>
+
 <div class="modal fade" id="privacypolicy" tabindex="-1" role="dialog" aria-labelledby="termsandcondi" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -512,11 +570,8 @@ Motion Pictures determination is contrary to these terms and conditions or by it
     
     <section id="innerpage">
         <div class="container wow fadeInUp">
-
-        </div>
-    </section>
-    <main  id="main" class="bg-white">
-        <div class="form-conainer">
+          <main  id="main" class="bg-white">
+        
             <div class="row">
                 <div class="col-lg-4 col-md-4 bg-white col-sm-12 hidden-xs">
 
@@ -906,75 +961,16 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                 </aside>
             </div>
 
-        </div>
+       
 
 
     </main>
+        </div>
+    </section>
+    
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<!--     <script>
 
-        var fileCount = 0;
-
-        var showFileCount = function () {
-            $('#file_count').text('Files selected: ' + fileCount);
-
-        };
-        showFileCount();
-        $(document).on('click', '.dele', function () {
-            $(this).parents('span').remove();
-            fileCount -= 1;
-            showFileCount();
-        })
-
-        $('#uploadFile').on('change', function () {
-            var filename = this.value;
-            var lastIndex = filename.lastIndexOf("\\");
-            if (lastIndex >= 0) {
-                filename = filename.substring(lastIndex + 1);
-            }
-            var files = $('#uploadFile')[0].files;
-            for (var i = 0; i < files.length; i++) {
-                $("#upload_prev").append('<span>' + '<div class="filenameupload">' + files[i].name + ' abc</div>' + '<span class="dele" ><i class="fa fa-times"></i></span></span>');
-            }
-            fileCount += files.length;
-            showFileCount();
-        });
-    </script> -->
-
-
-
-  <!--   <script>
-        var fileCounta = 0;
-        var showFileCounta = function () {
-            $('#file_counta').text('Files selected: ' + fileCounta);
-
-        };
-        showFileCounta();
-        $(document).on('click', '.remove', function () {
-            $(this).parents('span').remove();
-            fileCounta -= 1;
-            showFileCounta();
-        })
-
-        $('#uploadFilea').on('change', function () {
-            var filenamea = this.value;
-            var lastIndex = filenamea.lastIndexOf("\\");
-            if (lastIndex >= 0) {
-                filenamea = filenamea.substring(lastIndex + 1);
-            }
-            var files = $('#uploadFilea')[0].files;
-            for (var j = 0; j < files.length; j++) {
-                $("#upload_preva").append('<span>' + '<div class="filenameupload">' + files[j].name + ' abc</div>' + '<span class="remove" ><i class="fa fa-times"></i></span></span>');
-            }
-            fileCounta += files.length;
-            showFileCounta();
-        });
-
-
-
-
-</script> -->
 
   <script type="text/javascript">
         var ev_sub_category = {
