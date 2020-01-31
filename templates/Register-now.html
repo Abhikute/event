@@ -55,6 +55,48 @@
     -webkit-transform: scaleY(1.0);
   }
 }
+
+.button {
+  background-color: #004A7F;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  -webkit-animation: glowing 1500ms infinite;
+  -moz-animation: glowing 1500ms infinite;
+  -o-animation: glowing 1500ms infinite;
+  animation: glowing 1500ms infinite;
+}
+@-webkit-keyframes glowing {
+  0% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; -webkit-box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+}
+
+@-moz-keyframes glowing {
+  0% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; -moz-box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+}
+
+@-o-keyframes glowing {
+  0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+}
+
+@keyframes glowing {
+  0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+}
 </style>
 
 <div class="spinner" id="pageloader">
@@ -585,7 +627,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
 
                         <div class="col-lg-12 col-md-12 side-img-content">
                            
-                            <p  class="d-lg-none" data-toggle="collapse" data-target="#dem"><u>Important Instructions</u></p>
+                            <p  class="d-lg-none" data-toggle="collapse" data-target="#dem"><button type="button" class="button">Important Instructions</button></p>
                            
 
                         </div>
@@ -659,7 +701,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                        
                       </div>
                 </div>
-                <aside class="col-sm-12 col-lg-8 col-md-8 pl0  content-form">
+                <aside class="col-sm-12 col-lg-8 col-md-8 p8  content-form">
 
 
 

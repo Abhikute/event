@@ -49,6 +49,25 @@
   position: absolute;
   top: 50%;
 }
+.navbar-brand small {
+  display:block;
+  font-size:12px;
+}
+
+.navbar-toggle {top:10px}
+
+@media (min-width:768px) {
+
+  .navbar-brand {
+    padding-top:20px;
+  }
+
+  .nav.navbar-nav a {
+    padding-top:30px;
+    padding-bottom:30px;
+  }
+
+}
     </style>
 </head>
 
@@ -59,7 +78,8 @@
             <div id="logo" class="pull-left">
 
                 <a href="{% url 'index' %}" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title="titile"></a>
-                <div class="d-inline-block mr-1">VYOMA<span> Motion Pictures Pvt.Ltd.</span></div>
+                 <a class="navbar-brand navbar-brand-fix" href="#">VYOMA Motion Pictures<small>Feel the Entertenment</small></a>
+                <!-- <div class="d-inline-block">VYOMA<span> Motion Pictures</span></div> -->
                 
 
             </div>
@@ -154,6 +174,7 @@
                             <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
                             <a href="https://www.linkedin.com/in/vyoma-motion-pictures-661805198" class="linkedin"><i class="fa fa-linkedin"></i></a>
                             <a href="https://www.youtube.com/channel/UCsHBRZvmc-ChRdVncgV8Asg?view_as=subscriber" class="linkedin"><i class="fa fa-youtube"></i></a>
+                            <a href="https://www.youtube.com/channel/UCsHBRZvmc-ChRdVncgV8Asg?view_as=subscriber" class="telegram"><i class="fa fa-telegram"></i></a>
                         </div>
 
                     </div>

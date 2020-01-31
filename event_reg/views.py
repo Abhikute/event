@@ -291,7 +291,7 @@ def FileUpload(request,pk=None,id=None):
 		pk=pk
 		
 		billing_amount=request.POST.get('data')
-		
+		print("billing_amount",billing_amount)
 		if pk==None or id==None:
 			id=request.POST.get('event_id')
 			pk=request.POST.get('event_pk')

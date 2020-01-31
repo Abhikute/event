@@ -56,6 +56,47 @@
     -webkit-transform: scaleY(1.0);
   }
 }
+.button {
+  background-color: #004A7F;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  -webkit-animation: glowing 1500ms infinite;
+  -moz-animation: glowing 1500ms infinite;
+  -o-animation: glowing 1500ms infinite;
+  animation: glowing 1500ms infinite;
+}
+@-webkit-keyframes glowing {
+  0% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; -webkit-box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+}
+
+@-moz-keyframes glowing {
+  0% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; -moz-box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+}
+
+@-o-keyframes glowing {
+  0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+}
+
+@keyframes glowing {
+  0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+}
 </style>
 
 
@@ -86,7 +127,7 @@
                         </div>
                         <div class="col-lg-12 col-md-12 side-img-content">
                            <!--  <button  style="margin-left:26%" class="btn btn-secondary" data-toggle="collapse" data-target="#dem">Important Instructions</button> -->
-                            <p  class="d-lg-none" data-toggle="collapse" data-target="#dem"><u>Important Instructions</u></p>
+                            <p  class="d-lg-none" data-toggle="collapse" data-target="#dem"><button type="button" class="button">Important Instructions</button></p>
                            
 
                         </div>
@@ -248,6 +289,7 @@
                                   </table>
                                   <input type="hidden" id="event_id" name="event_id" value="{{event_id.pk}}">
                                     <input type="hidden" id="event_pk" name="event_pk" value="{{event_id.event.pk}}">
+                                     <input type="hidden" id="data" name="data">
                                       <div class="col-lg-25 form-group  col-md-25">
 
 
@@ -278,6 +320,7 @@
 
                                                                                 </div>
                                                                             </div>
+                                                                            
 
                                                                         </div>
                                                                         
@@ -288,7 +331,7 @@
 
                                                           <div style="color: black" class="col-lg-12 col-md-12">
                                                                               <div id="upload_prev"></div>
-                                                                               <input type="hidden" id="data" name="data">
+                                                                               
                                                                         </div>
                                                  
                                                     
@@ -313,6 +356,8 @@
                                                                                 </div>
                                                                             </div>
 
+                                                                            
+
                                                                         </div>
 
                                                                     </div>
@@ -331,7 +376,7 @@
                                                                           </div> -->
                                                                           <div style="color: black" class="col-lg-12 col-md-12">
                                                                               <div id="upload_preva"></div>
-                                                                               <input type="hidden" id="data" name="data">
+                                                                              
                                                                         </div>
                                                     </div>
                                               
