@@ -370,7 +370,7 @@ def FileUpload(request,pk=None,id=None):
 	else:
 		image_count=image_count
 		video_count=video_count
-	return render(request,'fileUpload.html',{"event":eve,"image_count":image_count,"video_count":video_count})
+	return render(request,'FileUpload.html',{"event":eve,"image_count":image_count,"video_count":video_count})
 
 
 @login_required
