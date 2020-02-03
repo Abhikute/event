@@ -57,17 +57,35 @@
 .navbar-toggle {top:10px}
 
 @media (min-width:768px) {
-
+/*
   .navbar-brand {
     padding-top:20px;
   }
-
+*/
   .nav.navbar-nav a {
     padding-top:30px;
     padding-bottom:30px;
   }
 
 }
+@media (max-width: 768px) {
+  .btn-responsive {
+    padding:2px 4px;
+    font-size:80%;
+    line-height: 1;
+    border-radius:3px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .btn-responsive {
+    padding:4px 9px;
+    font-size:90%;
+    line-height: 1.2;
+  }
+}
+
+
     </style>
 </head>
 
@@ -78,8 +96,8 @@
             <div id="logo" class="pull-left">
 
                 <a href="{% url 'index' %}" class="scrollto"><img src="{% static 'event_reg/img/logo.png' %}" alt="" title="titile"></a>
-                 <a class="navbar-brand navbar-brand-fix" href="#">VYOMA Motion Pictures<small>Feel the Entertenment</small></a>
-                <!-- <div class="d-inline-block">VYOMA<span> Motion Pictures</span></div> -->
+                 <a class="navbar-brand navbar-brand-fix" href="#">VYOMA <span style="color:white">Motion Pictures</span></span><small style="margin-left:6.05em; font-size: 11px">Feel the Entertain. . .</small></a>
+                <!-- <div class="d-inline-block">VYOMA<span> Motion Pictures</span><small>Feel the Entertenment</small></div> -->
                 
 
             </div>
@@ -138,7 +156,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6 footer-info">
                         <img src="{% static 'event_reg/img/logo.png' %}" alt="TheEvenet">
-                        <p>VYOMA Motion Pictures Pvt. Ltd.</p>
+                        <p >VYOMA Motion Pictures Pvt. Ltd.</p>
                     </div>
 
                     <div class="col-lg-2 col-md-6 footer-links">

@@ -2358,8 +2358,8 @@ select.form-control:focus::-ms-value {
     border: none;
     padding: .375rem .75rem;
     font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
+    line-height: 2.5;
+    border-radius: 3.25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
 }
 
@@ -3915,10 +3915,10 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 
 .navbar-brand {
     display: inline-block;
-    padding-top: .3125rem;
-    padding-bottom: .3125rem;
+    /*padding-top: .3125rem;
+    padding-bottom: .3125rem;*/
     margin-right: 1rem;
-    font-size: 1.25rem;
+    font-size: 0.955rem;
     line-height: inherit;
     white-space: nowrap
 }

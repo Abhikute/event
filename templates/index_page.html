@@ -6,16 +6,16 @@
   
     <div id="owl-slider1" class="owl-carousel">
         {%for event in event%}
-        <div class="item"><img src="/media/{{event.event_photo}}" alt="The Last of us">
+        <div class="item"><img src="/media/{{event.event_photo}}" class="img-responsive" style="width: 100%; height: auto;" alt="Responsive image" >
                           <div class="slide-caption">
-                              <p class="heading">
+                              <!-- <p class="heading">
                                   {{event.event_name}}
-                              </p>
+                              </p> -->
                               <!-- <p class="subheading">
                                  Location :{{event.event_location}}
 
                               </p> -->
-                              <div> <a class="btn btn-info add-event-btn" tabindex="0" href="{% url 'register_with_pk' pk=event.pk %}"> REGISTER NOW</a>    </div>
+                              <div> <a   tyle="width: 100%; height: auto;" class="btn btn-warning btn-sm" href="{% url 'register_with_pk' pk=event.pk %}"> REGISTER NOW</a>    </div>
                           </div>
         
         </div>
