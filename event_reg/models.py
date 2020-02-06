@@ -81,8 +81,8 @@ class user_reg(models.Model):
     state=models.CharField(max_length=50,null=True,blank=True)
     pincode=models.IntegerField(null=True,blank=True)
     id_proof=models.CharField(max_length=50,null=True,blank=True)
-    identity_proof=models.ImageField(upload_to="images/",verbose_name='identity_proof',null=True,blank=True)
-   
+    identity_proof=models.ImageField(upload_to="identity_proof/",verbose_name='identity_proof',null=True,blank=True)
+    identity_proof_back=models.ImageField(upload_to="identity_proof/",verbose_name='identity_proof',null=True,blank=True)
   
 class PaytmHistory(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='rel_payment_paytm', on_delete=models.CASCADE, null=True, default=None)

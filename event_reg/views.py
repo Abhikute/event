@@ -410,7 +410,7 @@ def register(request,pk=None):
 			else:
 				registration_form.pop("event_name", None)
 				registration={**registration_form}
-				event_reg=user_reg.objects.create(user=User.objects.get(username=request.user),event=event.objects.get(pk=registration_form['event_id']),identity_proof=request.FILES.get('ph_id_proof'),**registration)
+				event_reg=user_reg.objects.create(user=User.objects.get(username=request.user),event=event.objects.get(pk=registration_form['event_id']),identity_proof=request.FILES.get('ph_id_proof'),identity_proof_back=request.FILES.get('ph_id_proof2'),**registration)
 				event_reg.save()
 			
 		except Exception as error:

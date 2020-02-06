@@ -4,9 +4,9 @@
 {% extends 'master.html' %}
 {% block content %}
   
-    <div id="owl-slider1" class="owl-carousel">
+    <div id="owl-slider1" class="owl-carousel owl-theme">
         {%for event in event%}
-        <div class="item"><img src="/media/{{event.event_photo}}" class="img-responsive" style="width: 100%; height: auto;" alt="Responsive image" >
+        <div class="item"><img src="/media/{{event.event_photo}}"   alt="Responsive image" >
                           <div class="slide-caption">
                               <!-- <p class="heading">
                                   {{event.event_name}}
@@ -132,10 +132,10 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div id="owl-carousel" class=" owl-carousel owl-theme">
+                    <div  id="owl-carousel" class=" owl-carousel owl-theme">
                         {%for event in event %}
                         <div class="card" >
-                            <img class="card-img-top" src="/media/{{event.event_photo}}" alt="Card image" />
+                            <img class="card-img-top" src="/media/{{event.event_photo1}}" alt="Card image" />
 
                             <div class="card-body">
                                 <h4 class="card-title" id="title"><a href="{% url 'event_details_with_pk' pk=event.pk %}">{{event.event_name}}</a></h4>
