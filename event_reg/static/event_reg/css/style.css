@@ -485,6 +485,9 @@ label {
 #upload_prev span, #upload_preva span {
     display: flex;
     border-bottom: 1px solid #ccc;
+    color: darkgreen;
+}
+    align-items: center;
     padding: 5px;
     font-size: 12px
 }
@@ -1210,7 +1213,7 @@ a:hover {
 
 #mobile-nav-toggle {
     position: fixed;
-    right: 42px;
+    right: 12px;
     top: 0;
     z-index: 999;
     margin: 15px 15px 0 0;
@@ -2030,7 +2033,7 @@ body.mobile-nav-active {
 
     #subscribe button {
         border: 0;
-        padding: 7px 25px;
+        padding: 1px 25px;
         cursor: pointer;
         background: #a99850;
         color: #fff;
@@ -2363,6 +2366,7 @@ body.mobile-nav-active {
         line-height: 1;
         padding: 8px 0;
         margin-right: 4px;
+        margin-top: 5px;
         border-radius: 50%;
         text-align: center;
         width: 36px;
@@ -2897,7 +2901,7 @@ body.mobile-nav-active {
 
 .venue-gallery {
     margin: 7px;
-    border: 1px solid #ccc;
+    border: 1px solid #3a3120;
     border-radius: 5px;
     padding: 5px
 }

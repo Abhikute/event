@@ -236,14 +236,25 @@ body {
 </style>
 
 
-<div  id="progress_bar" class="preloader-wrap">
-  <div class="percentage" id="precent"></div>
-  <div class="loader">
-    <div class="trackbar">
-      <div class="loadbar"></div>
-    </div>
-    <div class="glow"></div>
-  </div>
+<div class="spinner" id="pageloader">
+  
+  <div class="rect1"></div>
+  <div class="rect2"></div>
+  <div class="rect3"></div>
+  <div class="rect4"></div>
+  <div class="rect5"></div><br>
+  <button class="btn btn-primary" type="button" disabled>
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Uploading...
+</button><br><br>
+<!-- <button class="btn btn-warning" type="button" disabled>
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Please do not press 'Refresh' or 'Back' button 
+</button> -->
+<h5 style="color: black">Please do not press 'Refresh' or 'Back' button</h5>
+
+    
+ 
 </div>
     
     <section id="innerpage">
@@ -407,23 +418,7 @@ body {
                             
                             <div class="col-lg-12 col-md-12 ">
                                 <div class="white-bg">
-                                  <table class="table table-dark ">
-                                    
-                                    
-                                    <tr>
-                                      <th>Event Name</th>
-                                     <th>Event Category </th>
-                                      <th>File Count</th>
-                                       <th>Total Registration Fees</th>
-                                    </tr>
-                                    <tr class="bg-primary">
-                                      <td>{{event.event_name}}</td>
-                                      <td id="event_category" name="event_category" >{{event.event_category}}</td>
-                                      <td><div id="file_counta" class="text-center font-16 text-bold"></div></td>
-                                      <td><div id="amounta" class="text-center font-16 text-bold"></div></td>
-                                    </tr>
-                                   
-                                  </table>
+                                  
                                   <input type="hidden" id="event_id" name="event_id" value="{{event_id.pk}}">
                                     <input type="hidden" id="event_pk" name="event_pk" value="{{event_id.event.pk}}">
                                      <input type="hidden" id="data" name="data">
@@ -488,7 +483,7 @@ body {
                                                                             <div class="file-field ">
                                                                                 <div class="btn btn-outline-default waves-effect ">
                                                                                     <span><i  class="fa fa-plus"></i></span>
-                                                                                    <input type="file" id="uploadFilea"  name="FileUploada" multiple="multiple" value="Click" accept="video/*"  />
+                                                                                    <input type="file" id="uploadFilea"  name="FileUploada" multiple="multiple" accept="video/*"  />
 
                                                                                 </div>
                                                                             </div>
@@ -504,15 +499,43 @@ body {
                                                             </div>
                                                         </div>
 
-                                                          <!-- <div style="color: black" class="col-lg-12 col-md-12">
+                                                          <div class="col-lg-12 col-md-12">
+    <table class="table table-bordered">
+                                    
+                                    
+                                    <tr>
+                                      <th>Event Name</th>
+                                     <th>Event Category </th>
+                                      <th>File Count</th>
+                                       <th>Total Registration Fees /-</th>
+                                    </tr>
+                                    <tr class="bg-primary">
+                                      <td>{{event.event_name}}</td>
+                                      <td id="event_category" name="event_category" >{{event.event_category}}</td>
+                                      <td><div id="file_counta" class="text-center font-16 text-bold"></div></td>
+                                      <td><div id="amounta" class="text-center font-16 text-bold"></div></td>
+                                    </tr>
+                                   
+                                  </table>
+    <table id="gallery" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Selected file</th>
 
-                                                                            <div id="file_counta" class="text-center font-16 text-bold"></div>
-                                                                        
-                                                                        
-                                                                            <div id="amounta" class="text-center font-16 text-bold"></div>
-                                                                          </div> -->
+    </tr>
+  </thead>
+  <tbody>
+
+      <tr>
+        <td><div id="upload_preva"></div></td>
+      </tr>
+   
+  </tbody>
+</table>
+                                                                          </div>
+
                                                                           <div style="color: black" class="col-lg-12 col-md-12">
-                                                                              <div id="upload_preva"></div>
+                                                                              
                                                                               
                                                                         </div>
                                                     </div>
@@ -520,7 +543,7 @@ body {
                                                    
                                                    <div class="col-lg-12 text-center">
                                                         
-                                                        <input type="submit" class="btn btn-primary" value="CheckOut" />
+                                                        <input type="submit" class="btn btn-primary" value="Proceed for Payment" />
                                                        
 
                                                     </div>
@@ -569,7 +592,7 @@ body {
                                {        
                                         
                                          if (image_count >0){
-                                             $('#amounta').text((0+500*points.indexOf(points[i])) );
+                                             $('#amounta').text((0+500*points.indexOf(points[i]))+ '₹');
                                                 var d = 0+500*points.indexOf(points[i]);
                                                 document.getElementById("data").value = d;
               
@@ -577,7 +600,7 @@ body {
                                                    }
 
                                            else {
-                                            $('#amounta').text((1000+500*points.indexOf(points[i])));
+                                            $('#amounta').text((1000+500*points.indexOf(points[i]))+ '₹');
                                          var d = 1000+500*points.indexOf(points[i]);
                                           document.getElementById("data").value = d;
 
@@ -592,7 +615,7 @@ body {
            
 
             else{
-               $('#amounta').text( 0 );
+               $('#amounta').text( 0+ '₹' );
            var d = 0;
             document.getElementById("data").value = d;
 
@@ -620,7 +643,7 @@ body {
             var files = $('#uploadFile')[0].files;
             
             for (var i = 0; i < files.length; i++) {
-                $("#upload_prev").append('<span>' + '<div class="filenameupload"><table > <tr><td>'+ files[i].name  +'</td>             <td>'+files[i].size*0.000001+'Mb</td></tr></table></div>' + '<span class="dele" ><i class="fa fa-times"></i></span></span>');
+                $("#upload_preva").append('<span>' + ' <tr><td >'+ files[i].name  +'</td&nbsp;&nbsp;&nbsp;&nbsp;<td>'+files[i].size*0.000001+'MB</td></tr>' + '<tr><td class="text-right" ><span class="dele" data="'+ files[i].name  +'"><button class="btn btn-danger btn-sm pull-right" ><i class="fa fa-times"></i></button</td></tr></span></span>');
             }
            
             fileCount += files.length;
@@ -641,12 +664,12 @@ body {
              
             if(fileCounta >0){
               if(video_count >0){
-            $('#amounta').text((500*(fileCounta/fileCounta)+500*(fileCounta-1)));
+            $('#amounta').text((500*(fileCounta/fileCounta)+500*(fileCounta-1) + '₹'));
              var d = 500+500*(fileCounta-1);
             document.getElementById("data").value = d;
           }
           else{
-              $('#amounta').text((1000*(fileCounta/fileCounta)+500*(fileCounta-1)));
+              $('#amounta').text((1000*(fileCounta/fileCounta)+500*(fileCounta-1) + '₹'));
              var d = 1000+500*(fileCounta-1);
             document.getElementById("data").value = d;
 
@@ -654,7 +677,7 @@ body {
             }
 
             else{
-               $('#amounta').text( 0 );
+               $('#amounta').text( 0+ '₹' );
              var d = 0;
             document.getElementById("data").value = d;
             }
@@ -690,13 +713,13 @@ body {
             }
             var files = $('#uploadFilea')[0].files;
             for (var j = 0; j < files.length; j++) {
-                $("#upload_preva").append('<span>' + '<div class="filenameupload"> <table><tr><td>'+ files[j].name  +'</td>             <td>'+files[j].size*0.000001+'Mb</td></tr></table></div>' + '<span class="remove"data="'+ files[j].name  +'"><i class="fa fa-times"></i></span></span>');
+                $("#upload_preva").append('<span>' + '<tr><td>'+ files[j].name  +'</td></tr>&nbsp;&nbsp;&nbsp;<tr><td>'+files[j].size*0.000001+'MB</td></tr>' + '<tr><td><span class="remove"data="'+ files[j].name  +'"><button class="btn btn-danger btn-sm float-right"><i class="fa fa-times"></i></button</td></span></tr></span>');
             }
             fileCounta += files.length;
             showFileCounta();
         });
 
-
+a
 
 
 </script> 
@@ -724,61 +747,11 @@ body {
     </script>
 
 <script type="text/javascript">
-  $(document).ready(function() 
-{
-    $('#progress_bar').hide();
-
-    $('form').submit(function() 
-    {
-        $('#progress_bar').show();
-        var width = 100,
-    perfData = window.performance.timing, // The PerformanceTiming interface represents timing-related performance information for the given page.
-    EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart),
-    time = parseInt((EstimatedTime/100)%60)*100;
-
-// Loadbar Animation
-$(".loadbar").animate({
-  width: width + "%"
-}, time);
-
-// Loadbar Glow Animation
-$(".glow").animate({
-  width: width + "%"
-}, time);
-
-// Percentage Increment Animation
-var PercentageID = $("#precent"),
-        start = 0,
-        end = 100,
-        durataion = time;
-        animateValue(PercentageID, start, end, durataion);
-        
-function animateValue(id, start, end, duration) {
-  
-    var range = end - start,
-      current = start,
-      increment = end > start? 1 : -1,
-      stepTime = Math.abs(Math.floor(duration / range)),
-      obj = $(id);
-    
-    var timer = setInterval(function() {
-        current += increment;
-        $(obj).text(current + "%");
-      //obj.innerHTML = current;
-        if (current == end) {
-            clearInterval(timer);
-        }
-    }, stepTime);
-}
-
-// Fading Out Loadbar on Finised
-setTimeout(function(){
-  $('.preloader-wrap').fadeOut(300);
-}, time);
-
-    // $("#pageloader").fadeIn();
+    $(document).ready(function(){
+  $("#myform").on("submit", function(){
+    $("#pageloader").fadeIn();
   });//submit
-    }) 
+});//document ready
 </script>
 
 

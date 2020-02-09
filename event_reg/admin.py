@@ -40,3 +40,5 @@ admin.site.register(event,eventview)
 admin.site.register(user_reg,view_detials)
 admin.site.register(Images,Images_view)
 
+
+

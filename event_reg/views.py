@@ -146,10 +146,11 @@ def usersignup(request):
 			})
 			to_email = str(form.cleaned_data.get('email'))
 			print("Uid",urlsafe_base64_encode(force_bytes(user.pk)),"Token:",account_activation_token.make_token(user))
-			send_mail(email_subject, message,'info@vyomamotionpictures.com',[to_email])
+			send_mail(email_subject, message,'Vyoma Motion Pictures <info@vyomamotionpictures.com>',[to_email])
 			# email.send()
-			note='We have sent you an email, please confirm your email address to complete registration'
-			return render(request,'registration/response.html',{"note":note})
+			title_message="Account Activation Mail Sent"
+			note='Please use activation link from your inbox to activate your account'
+			return render(request,'registration/response.html',{"note":note ,"title_message":title_message,'form':SignUpForm()})
 	else:
 		form = SignUpForm()
 	return render(request, 'signup.html', {'form': form})
@@ -168,8 +169,9 @@ def activate_account(request, uidb64, token):
 	if user is not None and account_activation_token.check_token(user, token):
 		user.is_active = True
 		user.save()
+		title_message="Account Activated Successfully !"
 		note="Your account has been activate successfully"
-		return render(request,'registration/response.html',{"note":note})
+		return render(request,'registration/response.html',{"note":note,"title_message":title_message,'form':SignUpForm()})
 	else:
 		return HttpResponse('Activation link is invalid!')
 
@@ -262,7 +264,7 @@ def response(request, user_id,id):
 					payment_deatil=PaytmHistory.objects.create(user=User.objects.get(username=user_regi.user), user_reg=user_regi,**data_dict)
 					payment_deatil.save()
 					
-					send_mail(email_subject, message,'info@vyomamotionpictures.com',[to_email])
+					send_mail(email_subject, message,'Vyoma Motion Pictures <info@vyomamotionpictures.com>',[to_email])
 					message="Transaction ID:"+data_dict['TXNID']+"Order ID:"+data_dict['ORDERID']
 					title_message="Files Uploaded Successfully"
 					return render(request,"response.html", {"event": event.objects.all(),"title_message":title_message,"message":message})
@@ -408,10 +410,20 @@ def register(request,pk=None):
 				raise Exception(error_msg)
 			
 			else:
-				registration_form.pop("event_name", None)
-				registration={**registration_form}
-				event_reg=user_reg.objects.create(user=User.objects.get(username=request.user),event=event.objects.get(pk=registration_form['event_id']),identity_proof=request.FILES.get('ph_id_proof'),identity_proof_back=request.FILES.get('ph_id_proof2'),**registration)
-				event_reg.save()
+				
+				if request.FILES.get('ph_id_proof2')==None:
+					registration_form.pop("ph_id_proof2", None)
+					registration_form.pop("event_name", None)
+					registration={**registration_form}
+					event_reg=user_reg.objects.create(user=User.objects.get(username=request.user),event=event.objects.get(pk=registration_form['event_id']),identity_proof=request.FILES.get('ph_id_proof'),identity_proof_back=request.FILES.get('ph_id_proof2'),**registration)
+					event_reg.save()
+
+				else:
+					registration_form.pop("event_name", None)
+					registration={**registration_form}
+
+					event_reg=user_reg.objects.create(user=User.objects.get(username=request.user),event=event.objects.get(pk=registration_form['event_id']),identity_proof=request.FILES.get('ph_id_proof'),identity_proof_back=request.FILES.get('ph_id_proof2'),**registration)
+					event_reg.save()
 			
 		except Exception as error:
 			print(error)

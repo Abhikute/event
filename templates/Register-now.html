@@ -100,11 +100,13 @@
 </style>
 
 <div class="spinner" id="pageloader">
+
   <div class="rect1"></div>
   <div class="rect2"></div>
   <div class="rect3"></div>
   <div class="rect4"></div>
   <div class="rect5"></div>
+ 
 </div>
 
 <div class="modal fade" id="privacypolicy" tabindex="-1" role="dialog" aria-labelledby="termsandcondi" aria-hidden="true">
@@ -643,22 +645,51 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                             
 
                             <div class="brder-bottm ">
-                                <div class="text-uppercase text-bold mb-2"><i class="fa fa-pencil-square-o"></i> How to Apply?</div>
-                                <ul class="steps">
-                                    <li>
-                                        Fill the registration form with correct details
-                                    </li>
-                                    <li>
-                                        Don't forget to upload photos or videos as per your competition catagory.
-                                    </li>
+                                <div class="text-uppercase text-bold mb-2"><i class="fa fa-image"></i> File Uploading Instructions</div>
+                                <ul>
 
-                                    <li>
-                                        Do competition payment via Paytm login / debit / credit cards.
-                                    </li>
-                                    <li>
-                                        If you receive payment successfull page that means your registrion is Done. 
-                                    </li>
-                                </ul>
+                                        <li>
+                                           File Size upto:- {{event.file_size_instruction}}.
+                                        </li>
+                                        <li>
+                                           Categories:- {{event.file_categories_instruction}}.
+                                        </li>
+                                        <li>
+                                           Language:- ALL.
+                                        </li>
+                                        <li>
+                                            Age:- {{event.participant_Age_instruction}}
+                                        </li>
+                                        <li>
+                                            Registration Fees:-{{event.Registration_fees_instruction}}.
+                                        </li>
+                                       
+                                       
+                                        <li>
+                                            Entries Deadline:- {{event.entry_deadline_instruction}}.
+                                        </li>
+                                        <li>
+                                             Notification Date:- {{event.notification_date_instruction}}.
+                                        </li>
+                                        <li>
+                                            Prize Distribution Ceremony:- {{event.prize_dist_instruction}}
+                                        </li>
+                                        <li>
+                                            {{event.other_instruction1}}
+                                        </li>
+                                        <li>
+                                            {{event.other_instruction2}}
+                                        </li>
+                                        <li>
+                                             {{event.other_instruction3}}
+                                        </li>
+                                        <li>
+                                           {{event.other_instruction4}}
+                                        </li>
+                                        <li>
+                                             {{event.other_instruction5}}
+                                        </li>
+                                    </ul>
 
                             </div>
                             
@@ -675,22 +706,51 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                             <div class="d-none d-lg-block">
 
                             <div class="brder-bottm ">
-                                <div class="text-uppercase text-bold mb-2"><i class="fa fa-pencil-square-o"></i> How to Apply?</div>
-                                <ul class="steps">
-                                    <li>
-                                        Fill the registration form with correct details
-                                    </li>
-                                    <li>
-                                        Don't forget to upload photos or videos as per your competition catagory.
-                                    </li>
+                                <div class="text-uppercase text-bold mb-2"><i class="fa fa-image"></i> File Uploading Instructions</div>
+                                <ul>
 
-                                    <li>
-                                        Do competition payment via Paytm login / debit / credit cards.
-                                    </li>
-                                    <li>
-                                        If you receive payment successfull page that means your registrion is Done. 
-                                    </li>
-                                </ul>
+                                        <li>
+                                           File Size upto:- {{event.file_size_instruction}}.
+                                        </li>
+                                        <li>
+                                           Categories:- {{event.file_categories_instruction}}.
+                                        </li>
+                                        <li>
+                                           Language:- ALL.
+                                        </li>
+                                        <li>
+                                            Age:- {{event.participant_Age_instruction}}
+                                        </li>
+                                        <li>
+                                            Registration Fees:-{{event.Registration_fees_instruction}}.
+                                        </li>
+                                       
+                                       
+                                        <li>
+                                            Entries Deadline:- {{event.entry_deadline_instruction}}.
+                                        </li>
+                                        <li>
+                                             Notification Date:- {{event.notification_date_instruction}}.
+                                        </li>
+                                        <li>
+                                            Prize Distribution Ceremony:- {{event.prize_dist_instruction}}
+                                        </li>
+                                        <li>
+                                            {{event.other_instruction1}}
+                                        </li>
+                                        <li>
+                                            {{event.other_instruction2}}
+                                        </li>
+                                        <li>
+                                             {{event.other_instruction3}}
+                                        </li>
+                                        <li>
+                                           {{event.other_instruction4}}
+                                        </li>
+                                        <li>
+                                             {{event.other_instruction5}}
+                                        </li>
+                                    </ul>
 
                             </div>
                             </div>
@@ -883,7 +943,7 @@ Motion Pictures determination is contrary to these terms and conditions or by it
                                                     </div>
                                                      <div  id="ph_id_proof2" class="col-lg-4 form-group  col-md-4">
                                                         <label>Upload ID proof back side</label>
-                                                        <input class="form-control" type="file" name="ph_id_proof2" required/>
+                                                        <input class="form-control" type="file" name="ph_id_proof2" />
                                                     </div>
                       
 
@@ -924,7 +984,15 @@ Motion Pictures determination is contrary to these terms and conditions or by it
 <script type="text/javascript">
 function showDiv(divId, element)
 {
-    document.getElementById(divId).style.display = element.value == 'Pancard' ? 'none' : 'block';
+  if (element.value == 'Driving_licence' || element.value == 'Passport' || element.value == 'Pancard' ){
+    document.getElementById(divId).style.display ='none' ;
+  
+  }
+  else if (element.value == 'Adhar_card' || element.value == 'Voter_id' ){
+    document.getElementById(divId).style.display ='block' ;
+    
+  }
+  
 }
 
 </script>
