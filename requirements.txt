@@ -30,7 +30,7 @@ ipython-genutils==0.2.0
 itsdangerous==1.1.0
 jdcal==1.4.1
 jedi==0.15.1
-Jinja2==2.10.1
+Jinja2==2.11.3
 jira==2.0.0
 Kivy==1.11.1
 Kivy-Garden==0.1.4
