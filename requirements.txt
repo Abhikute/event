@@ -25,7 +25,7 @@ Flask==1.0.3
 geos==0.2.2
 icalendar==4.0.3
 idna==2.8
-ipython==7.7.0
+ipython==7.16.3
 ipython-genutils==0.2.0
 itsdangerous==1.1.0
 jdcal==1.4.1
